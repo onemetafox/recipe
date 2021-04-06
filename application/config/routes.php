@@ -49,13 +49,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'CrudController';
+$route['default_controller'] = 'Welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['add'] = 'CrudController/add';
-$route['delete'] = 'CrudController/delete';
-$route['delete/(:num)'] = 'CrudController/delete/$1';
-$route['edit'] = 'CrudController/edit';
-$route['edit/(:num)'] = 'CrudController/edit/$1';
-$route['update'] = 'CrudController/update';
+// $route['add'] = 'CrudController/add';
+// $route['delete'] = 'CrudController/delete';
+// $route['delete/(:num)'] = 'CrudController/delete/$1';
+// $route['edit'] = 'CrudController/edit';
+// $route['edit/(:num)'] = 'CrudController/edit/$1';
+// $route['update'] = 'CrudController/update';
