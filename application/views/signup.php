@@ -62,10 +62,10 @@
                 </div>
                 <input type="submit" value="Sign up" data-wait="Please wait..." class="button-primary w-button">
               </form>
-              <div class="success-message w-form-done">
+              <div class="success-message w-form-done" style="display:hidden">
                 <div>Thank you for registering.</div>
               </div>
-              <div class="error-message w-form-fail">
+              <div class="error-message w-form-fail" style="display:hidden">
                 <div>Oops! Something went wrong.</div>
               </div>
             </div>
@@ -120,10 +120,9 @@
       </div>
     </div>
   </div>
-  <script src="<?=asset_url()?>js/jquery.js" type="text/javascript"></script>
-  <script src="<?=asset_url()?>js/webflow.js" type="text/javascript"></script>
   <script>
     $(document).ready(function () {
+        
         $("form").submit(function (event) {
             var formData = {
                 name: $("#Name").val(),
@@ -131,21 +130,45 @@
                 password: $("#Password").val(),
                 cfm_password: $("#Cfm_password").val(),
             };
-
-            $.ajax({
-                type: "POST",
-                url: "<?=base_url?>/welcome/register",
-                data: formData,
-                dataType: "json",
-                encode: true,
-            }).done(function (data) {
-                console.log(data);
-            });
+            
+            if($("#checkbox").prop("checked") == true){
+              if(formData['password'] === formData['cfm_password']){
+                $.ajax({
+                    type: "POST",
+                    url: "<?=base_url()?>/welcome/register",
+                    data: formData,
+                    dataType: "json",
+                    encode: true,
+                }).done(function (data) {
+                  if (data["success"] == "true" ){
+                    $(".success-message > div").html(data["msg"]);
+                    $(".error-message").attr("display","none");
+                    $(".success-message").attr("display","block");
+                  }else{
+                    $(".error-message > div").html(data["msg"]);
+                    $(".error-message").attr("display","block");
+                    $(".success-message").attr("display","none");
+                  }
+                  
+                });
+              }else{
+                $(".error-message > div").html("Password is not matched");
+                $(".error-message").attr("display","block");
+              }
+            }else{
+                $(".error-message > div").html("Are you agree with our term and policy?");
+                $(".error-message").attr("display","block");
+              return;
+            }
+            
 
             event.preventDefault();
         });
     });
   </script>
+  <script src="<?=asset_url()?>js/jquery.js" type="text/javascript"></script>
+  <script src="<?=asset_url()?>js/webflow.js" type="text/javascript"></script>
+  
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 </body>
 </html>

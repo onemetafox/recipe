@@ -3,7 +3,7 @@
 <html data-wf-page="606c3380434b8b60d6d84490" data-wf-site="606c337f434b8bec59d84465">
 <head>
   <meta charset="utf-8">
-  <title><?= $page_title ?></title>
+  <title>Sign in</title>
   <meta content="Software is a premium Webflow Template for top-notch Software and SaaS companies. If you are looking for a premium dark mode template to take your company website to the next level, Software is the template for you." name="description">
   <meta content="Sign In - Software UI Kit - Webflow Ecommerce Website Template" property="og:title">
   <meta content="Software is a premium Webflow Template for top-notch Software and SaaS companies. If you are looking for a premium dark mode template to take your company website to the next level, Software is the template for you." property="og:description">
@@ -18,7 +18,7 @@
   <link href="<?=asset_url()?>css/normalize.css" rel="stylesheet" type="text/css">
   <link href="<?=asset_url()?>css/webflow.css" rel="stylesheet" type="text/css">
   <link href="<?=asset_url()?>css/inspeqo-b2b.webflow.css" rel="stylesheet" type="text/css">
-
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
   <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
   <link href="<?=asset_url()?>images/favicon.svg" rel="shortcut icon" type="image/x-icon">
@@ -38,14 +38,18 @@
           <p class="paragraph sign-in">Lorem ipsum dolor sit amet, consectetur adipiscing elit amet odio semper egestas.</p>
           <div class="sign-in-form-block w-form">
             <form id="email-form" name="email-form" data-name="Email Form" redirect="https://softwaretemplate.webflow.io/" data-redirect="https://softwaretemplate.webflow.io/" class="sign-in-form">
-              <div class="input-wrapper"><label for="Email-2">Email Address</label><input type="email" class="input w-input" maxlength="256" name="Email" data-name="Email" placeholder="Enter email address" id="Email-2" required=""></div>
+              <div class="input-wrapper">
+                <label for="Email-2">Email Address</label>
+                <input type="email" class="input w-input" maxlength="256" name="Email" data-name="Email" placeholder="Enter email address" id="Email" required="">
+              </div>
               <div class="input-wrapper">
                 <div class="top-content input-wrapper"><label for="Password">Password</label>
-                  <a href="<?= base_url()?>welcome/forget_password" class="recovery-password-link">Forgot Password?</a>
+                  <a href="<?= base_url()?>" class="recovery-password-link">Forgot Password?</a>
                 </div><input type="password" class="input w-input" maxlength="256" name="Password" data-name="Password" placeholder="Enter password" id="Password" required=""><label class="w-checkbox sign-in-checkbox-field">
                   <div class="w-checkbox-input w-checkbox-input--inputType-custom sign-in-checkbox"></div><input type="checkbox" id="checkbox" name="checkbox" data-name="Checkbox" style="opacity:0;position:absolute;z-index:-1"><span class="w-form-label">Remember Password</span>
                 </label>
-              </div><input type="submit" value="Login" data-wait="Please wait..." class="button-primary w-button">
+              </div>
+              <input type="submit" value="Login" data-wait="Please wait..." class="button-primary w-button">
             </form>
             <div class="success-message w-form-done">
               <div>Welcome back!</div>
@@ -66,7 +70,38 @@
       </div>
     </div>
   </div>
-    
+  <script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            var formData = {
+                email: $("#Email").val(),
+                password: $("#Password").val()
+            };
+            $.ajax({
+                type: "POST",
+                url: "<?=base_url()?>/welcome/login",
+                data: formData,
+                dataType: "json",
+                encode: true,
+            }).done(function (data) {
+              if (data["success"] == true ){
+                var user = data["user"];
+                if(user.role == 1){
+                  window.location = "admin";
+                }else{
+                  window.location = "dashboard";
+                }
+              }else{
+                $(".error-message > div").html(data["msg"]);
+                $(".error-message").attr("display","block");
+                $(".success-message").attr("display","none");
+              }
+              
+            });
+            event.preventDefault();
+        });
+    });
+  </script>
   <script src="<?= asset_url()?>js/jquery.js" type="text/javascript"></script>
   <script src="<?= asset_url()?>js/webflow.js" type="text/javascript"></script>
 

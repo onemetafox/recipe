@@ -20,7 +20,9 @@
             return $this->load->view('layout/template', $this->template);
 			
         }
-        
+        public function user_data(){
+			return $this->session->userdata("user");
+		}
         public function json($data){
 			echo json_encode($data);
         }

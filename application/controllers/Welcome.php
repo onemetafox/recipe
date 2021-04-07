@@ -54,8 +54,37 @@ class Welcome extends BaseController {
 		// $this->render("signin", $data);
 	}
 	public function register(){
-		$data = $this->request->post();
-		print_r($data);
+		$data = $this->input->post();
+		if($data["password"] == $data["cfm_password"]){
+			$this->load->model("User_model", "user");
+			$user = $this->user->getDataByParam(array("email"=>$data["email"]));
+			if($user){
+				$this->json(array("success"=>false, "msg"=>"Your account already exist!"));
+			}else{
+				unset($data["cfm_password"]);
+				$data["password"] = md5($data["password"]);
+				$this->user->setData($data);
+				$this->json(array("success"=>true, "msg"=>"Your account is created."));
+			}
+		}else{
+			$this->json(array("success"=>false, "msg"=>"Password does not match!"));
+		}
+	}
+
+	public function login(){
+		$data = $this->input->post();
+		$this->load->model("User_model", "user");
+		$user = $this->user->getOneByParam(array("email" => $data["email"]));
+		if($user){
+			if($user["password"] == md5($data["password"])){
+				$this->session->set_userdata("user",$user);
+				$this->json(array("success" => true, "msg" => "Success Login", "user" => $user));
+			}else{
+				$this->json(array("success" => false, "msg"=>"Password incorrect"));
+			}
+		}else{
+			$this->json(array("success" => false, "msg" => "Your account is not exist"));
+		}
 	}
 	public function forget_password(){
 		$this->load->view("landing/forget_password");
