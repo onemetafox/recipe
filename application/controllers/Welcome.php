@@ -1,7 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+require_once(APPPATH.'core/BaseController.php');
+
+class Welcome extends BaseController {
+	
+	var $layout = "default";
+
+	public function __contruct(){
+		$this->load_model("User_model", "model");
+		parent::__construct();
+	}
 
 	/**
 	 * Index Page for this controller.
@@ -20,10 +29,20 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view("index");
+		$data["page_title"] = "Recipe";
+		$this->load->view("index", $data);
 	}
 	
 	public function signin(){
-		$this->load->view("signin");
+		$data["page_title"] = "Sign In";
+		// $this->load->view("signin", $data);
+		$this->render("signin", $data);
+		
+	}
+
+	public function signup(){
+		// $data["page_title"] = "Sign Up";
+		$this->load->view("signup");
+		// $this->render("signin", $data);
 	}
 }
