@@ -34,15 +34,30 @@ class Welcome extends BaseController {
 	}
 	
 	public function signin(){
-		$data["page_title"] = "Sign In";
-		// $this->load->view("signin", $data);
-		$this->render("signin", $data);
+		// $data["page_title"] = "Sign In";
+		$this->load->view("signin");
+		// $this->render("signin", $data);
 		
 	}
-
+	public function condition (){
+		$data["page_title"] = "Term and Condition";
+		$this->render("landing/condition", $data);
+		// $this->load->view("landing/condition");
+	}
+	public function policy(){
+		$data["page_title"] = "Policy";
+		$this->render("landing/policy", $data);
+	}
 	public function signup(){
 		// $data["page_title"] = "Sign Up";
 		$this->load->view("signup");
 		// $this->render("signin", $data);
+	}
+	public function register(){
+		$data = $this->request->post();
+		print_r($data);
+	}
+	public function forget_password(){
+		$this->load->view("landing/forget_password");
 	}
 }

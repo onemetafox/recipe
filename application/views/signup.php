@@ -22,6 +22,7 @@
   <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
   <link href="<?=asset_url()?>images/favicon.svg" rel="shortcut icon" type="image/x-icon">
   <link href="<?=asset_url()?>images/webclip.svg" rel="apple-touch-icon">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
   <div class="page-wrapper utility-page">
@@ -37,7 +38,7 @@
             <h1 class="title sign-up">Get started today!</h1>
             <p class="paragraph sign-up">Lorem ipsum dolor sit amet, consectetur adipiscing elit amet odio semper egestas.</p>
             <div class="sign-in-form-block w-form">
-              <form id="email-form" name="email-form" data-name="Email Form" redirect="https://softwaretemplate.webflow.io/utility-pages/email-confirmation" data-redirect="https://softwaretemplate.webflow.io/utility-pages/email-confirmation" class="sign-up-form">
+              <form id="signup-form" class="sign-up-form">
                 <div class="input-wrapper">
                     <label for="Name">Full Name</label>
                     <input type="text" class="input w-input" maxlength="256" name="Name" data-name="Name" placeholder="Enter your full name" id="Name" required="">
@@ -56,10 +57,10 @@
                     <label class="w-checkbox sign-up-checkbox-field">
                         <div class="w-checkbox-input w-checkbox-input--inputType-custom sign-up-checkbox"></div>
                         <input type="checkbox" id="checkbox" name="checkbox" data-name="Checkbox" style="opacity:0;position:absolute;z-index:-1">
-                        <span class="w-form-label">I accept the <a href="../utility-pages/terms-conditions.html">Terms and Conditions</a> and <a href="../utility-pages/privacy-policy.html">Privacy Policy</a> of Software, Inc.</span>
+                        <span class="w-form-label">I accept the <a href="<?=base_url()?>welcome/condition">Terms and Conditions</a> and <a href="<?=base_url()?>welcome/policy">Privacy Policy</a> of Software, Inc.</span>
                     </label>
                 </div>
-                <input type="submit" value="Login" data-wait="Please wait..." class="button-primary w-button">
+                <input type="submit" value="Sign up" data-wait="Please wait..." class="button-primary w-button">
               </form>
               <div class="success-message w-form-done">
                 <div>Thank you for registering.</div>
@@ -68,7 +69,7 @@
                 <div>Oops! Something went wrong.</div>
               </div>
             </div>
-            <div class="sign-up-user-login-text">Already have an account? <a href="../utility-pages/sign-in.html" class="sign-up-user-login-link">Login</a>
+            <div class="sign-up-user-login-text">Already have an account? <a href="<?= base_url()?>welcome/signin" class="sign-up-user-login-link">Login</a>
             </div>
           </div>
           <div class="divider sign-up"></div>
@@ -121,6 +122,30 @@
   </div>
   <script src="<?=asset_url()?>js/jquery.js" type="text/javascript"></script>
   <script src="<?=asset_url()?>js/webflow.js" type="text/javascript"></script>
+  <script>
+    $(document).ready(function () {
+        $("form").submit(function (event) {
+            var formData = {
+                name: $("#Name").val(),
+                email: $("#Email").val(),
+                password: $("#Password").val(),
+                cfm_password: $("#Cfm_password").val(),
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "<?=base_url?>/welcome/register",
+                data: formData,
+                dataType: "json",
+                encode: true,
+            }).done(function (data) {
+                console.log(data);
+            });
+
+            event.preventDefault();
+        });
+    });
+  </script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 </body>
 </html>

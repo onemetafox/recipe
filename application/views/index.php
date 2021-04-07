@@ -28,7 +28,7 @@
     <div data-collapse="medium" data-animation="over-right" data-duration="1000" data-easing="ease-out-expo" data-easing2="ease-out-expo" data-w-id="58db7844-5919-d71b-dd74-2323ed8dffe9" role="banner" class="header w-nav">
       <div class="container-header">
         <div data-w-id="b08d9188-5f88-7cc3-b97d-62a680e404f7" class="split-content header-left">
-          <a href="index.html" aria-current="page" class="brand w-nav-brand w--current"><img src="<?=asset_url()?>images/logo-software-ui-kit.svg" alt="" class="header-logo"></a>
+          <a href="<?=base_url()?>" aria-current="page" class="brand w-nav-brand w--current"><img src="<?=asset_url()?>images/logo-software-ui-kit.svg" alt="" class="header-logo"></a>
         </div>
         <div data-w-id="7215a8a0-bb24-315b-4a87-24f3dad59dfc" class="split-content header-right">
           <nav role="navigation" class="nav-menu w-nav-menu">
@@ -122,7 +122,7 @@
                               </a>
                             </li>
                             <li class="dropdown-link-list-item">
-                              <a href="utility-pages/sign-up.html" class="dropdown-link w-inline-block">
+                              <a href="<?=base_url()?>welcome/signup" class="dropdown-link w-inline-block">
                                 <div>Sign Up</div>
                               </a>
                             </li>
@@ -263,7 +263,7 @@
           <div class="_2-buttons header-buttons-wrapper">
             <a href="<?= base_url('welcome/signin')?>" class="button-secondary login-header w-button">Login</a>
             <div class="space _2-buttons header-buttons"></div>
-            <a href="utility-pages/sign-up.html" class="button-primary sign-up-header w-button">Sign Up</a>
+            <a href="<?=base_url()?>welcome/signup" class="button-primary sign-up-header w-button">Sign Up</a>
           </div>
           <div class="menu-button w-nav-button">
             <div class="menu-button-wrapper">
@@ -488,7 +488,7 @@
             <div class="image-wrapper pages"><img src="<?=asset_url()?>images/software-webflow-template-ui-kit-sign-in.png" srcset="<?=asset_url()?>images/software-webflow-template-ui-kit-sign-in-p-500.png 500w, images/software-webflow-template-ui-kit-sign-in.png 1088w" sizes="(max-width: 479px) 67.890625px, (max-width: 767px) 74.0625px, 80.234375px" alt="" class="image pages"></div>
             <h3 class="title pages">Sign In</h3>
           </a>
-          <a href="utility-pages/sign-up.html" class="card pages w-inline-block">
+          <a href="<?=base_url()?>welcome/signup" class="card pages w-inline-block">
             <div class="image-wrapper pages"><img src="<?=asset_url()?>images/software-webflow-template-ui-kit-sign-up.png" srcset="<?=asset_url()?>images/software-webflow-template-ui-kit-sign-up-p-500.png 500w, images/software-webflow-template-ui-kit-sign-up.png 1088w" sizes="(max-width: 479px) 75.21875px, (max-width: 767px) 82.046875px, 88.890625px" alt="" class="image pages"></div>
             <h3 class="title pages">Sign Up</h3>
           </a>
@@ -540,7 +540,7 @@
           <div data-w-id="367ead7c-365b-f56a-8338-9b5672289114" class="_2-buttons footer-2-buttons">
             <a href="pricing.html" class="button-primary w-button">Get a Demo</a>
             <div class="space _2-buttons"></div>
-            <a href="utility-pages/sign-up.html" class="button-secondary w-button">Sign Up</a>
+            <a href="<?=base_url()?>welcome/signup" class="button-secondary w-button">Sign Up</a>
           </div>
         </div>
         <div class="divider footer-divider"></div>
@@ -630,7 +630,7 @@
                     <a href="utility-pages/sign-in.html" class="footer-link">Sign in</a>
                   </li>
                   <li class="footer-list-item">
-                    <a href="utility-pages/sign-up.html" class="footer-link w-inline-block">
+                    <a href="<?=base_url()?>welcome/signup" class="footer-link w-inline-block">
                       <div>Sign Up</div>
                     </a>
                   </li>
