@@ -35,7 +35,16 @@ class Welcome extends BaseController {
 	
 	public function signin(){
 		// $data["page_title"] = "Sign In";
-		$this->load->view("signin");
+		$user = $this->user_data();
+		if($user){
+			if($user->role == "1")
+				redirect(base_url() . "admin");
+			else
+				redirect(base_url() . "dashboard");
+		}else{
+			$this->load->view("signin");
+		}
+		
 		// $this->render("signin", $data);
 		
 	}
@@ -49,9 +58,15 @@ class Welcome extends BaseController {
 		$this->render("landing/policy", $data);
 	}
 	public function signup(){
-		// $data["page_title"] = "Sign Up";
-		$this->load->view("signup");
-		// $this->render("signin", $data);
+		$user = $this->user_data();
+		if($user){
+			if($user->role == "1")
+				redirect(base_url() . "admin");
+			else
+				redirect(base_url() . "dashboard");
+		}else{
+			$this->load->view("signup");
+		}
 	}
 	public function register(){
 		$data = $this->input->post();

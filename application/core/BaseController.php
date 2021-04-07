@@ -17,7 +17,7 @@
             $this->template['content'] = $this->load->view($content, $data, TRUE);
             $this->template['footer']  = $this->load->view('layout/'.$this->layout.'/footer', $data, TRUE);
 
-            return $this->load->view('layout/template', $this->template);
+            return $this->load->view('layout/'.$this->layout.'/template', $this->template);
 			
         }
         public function user_data(){
@@ -26,4 +26,16 @@
         public function json($data){
 			echo json_encode($data);
         }
+		public function all(){
+			$filter = $this->input->post();
+			return $this->model->getDataByParam($filter);
+		}
+		public function save(){
+			$data = $this->input-post();
+			if($data["id"]){
+				$this->model->updateData($data);
+			}else{
+				$this->model->setData($data);
+			}
+		}
 	}

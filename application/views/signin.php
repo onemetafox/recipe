@@ -44,7 +44,7 @@
               </div>
               <div class="input-wrapper">
                 <div class="top-content input-wrapper"><label for="Password">Password</label>
-                  <a href="<?= base_url()?>" class="recovery-password-link">Forgot Password?</a>
+                  <a href="<?= base_url()?>welcome/forget_password" class="recovery-password-link">Forgot Password?</a>
                 </div><input type="password" class="input w-input" maxlength="256" name="Password" data-name="Password" placeholder="Enter password" id="Password" required=""><label class="w-checkbox sign-in-checkbox-field">
                   <div class="w-checkbox-input w-checkbox-input--inputType-custom sign-in-checkbox"></div><input type="checkbox" id="checkbox" name="checkbox" data-name="Checkbox" style="opacity:0;position:absolute;z-index:-1"><span class="w-form-label">Remember Password</span>
                 </label>
@@ -87,9 +87,9 @@
               if (data["success"] == true ){
                 var user = data["user"];
                 if(user.role == 1){
-                  window.location = "admin";
+                  window.location = "<?=base_url()?>admin";
                 }else{
-                  window.location = "dashboard";
+                  window.location = "<?=base_url()?>dashboard";
                 }
               }else{
                 $(".error-message > div").html(data["msg"]);

@@ -43,7 +43,8 @@
 				$this->where($param);
 			}
 			$result = $this->db->get($this->table)->result_array();
-			return $result[0];
+			if($result)
+				return $result[0];
 		}
 
 		public function unsetDataById($id) {
