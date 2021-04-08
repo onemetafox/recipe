@@ -514,3 +514,14 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+
+$config['menus'] = array(
+    'admin' => array(
+        array('name'=>"Users", "url"=>"users/index")
+    ),
+    'customer' =>array(
+        array('name' => "Recipes", "url" =>"customer/recipe"),
+        array('name' => "Menus", "url" =>"customer/menu")
+    )
+);

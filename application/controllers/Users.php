@@ -8,7 +8,7 @@ class Users extends BaseController {
 	var $layout = "admin";
 
 	public function __contruct(){
-		$this->load_model("User_model", "model");
+		
 		parent::__construct();
 	}
 
@@ -35,6 +35,20 @@ class Users extends BaseController {
 
 	public function profile(){
 		$data["page_title"] = "Profile Page";
+		$session = $this->user_data();
+		$user = $this->user->getOneByParam(array("id"=>$session["id"]));
+		$menus = $this->config->item("menus");
+		if($user["role"] == 1){
+			$data["menus"] = $menus["admin"];
+		}else{
+			$data["menus"] = $menus["customer"];
+		}
+		$data["user"] = $user;
+		$data["restaurant"] = $this->restaurant->getOneByParam(array("id" => $user["restaurant_id"]));
 		$this->render("admin/profile",$data);
+	}
+
+	public function update(){
+		$data = $this->input->post();
 	}
 }

@@ -1,14 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require_once(APPPATH.'core/AdminController.php');
+require_once(APPPATH.'core/CustomerController.php');
 
-class Recipe extends AdminController {
+class Recipe extends CustomerController {
 	
-	var $layout = "customer";
-
 	public function __contruct(){
-		$this->load_model("User_model", "model");
 		parent::__construct();
 	}
 
@@ -29,7 +26,21 @@ class Recipe extends AdminController {
 	 */
 	public function index()
 	{
-		$data["page_title"] = "Users";
-		$this->render("users");
+		$data["page_title"] = "Recipes";
+		$user = $this->user_data();
+		$filter["user_id"] = $user["id"];
+		// $data["total_count"] = $this
+		$this->render("customer/recipe", $data);
+	}
+
+	public function view($id = null){
+		$data["page_title"] = "Edit Recipe";
+		$user = $this->user_data();
+		$data["categories"] = $this->category->getDataByParam(array("type"=>"1","user_id"=>$user["id"]));
+		if($id){
+			$data["recipe"] = $this->recipe->getDataById($id);
+			$data["ingredients"] = $this->ingredients->getDataByParam(array("recipe_id" => $id));
+		}
+		$this->render("customer/recipe-edit", $data);
 	}
 }

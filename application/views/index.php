@@ -261,9 +261,15 @@
             </div>
           </div>
           <div class="_2-buttons header-buttons-wrapper">
-            <a href="<?= base_url('welcome/signin')?>" class="button-secondary login-header w-button">Login</a>
-            <div class="space _2-buttons header-buttons"></div>
-            <a href="<?=base_url()?>welcome/signup" class="button-primary sign-up-header w-button">Sign Up</a>
+            <?php $user = $this->session->userdata("user"); 
+                if(!$user){
+            ?>
+              <a href="<?= base_url('welcome/signin')?>" class="button-secondary login-header w-button">Login</a>
+              <div class="space _2-buttons header-buttons"></div>
+              <a href="<?=base_url()?>welcome/signup" class="button-primary sign-up-header w-button">Sign Up</a>
+            <?php }else {?>
+              <a href="<?=base_url()?>users/profile" class="button-primary sign-up-header w-button">Dashboard</a>
+            <?php } ?>
           </div>
           <div class="menu-button w-nav-button">
             <div class="menu-button-wrapper">

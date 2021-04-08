@@ -4,18 +4,17 @@
 	class BaseController extends CI_Controller
 	{
         var $layout = "";
-		var $page_title = "";
-		var $data = [];
+		var $data = array();
 		public function __construct() {
 			parent::__construct();
-			$this->load->helper(array('url', 'form'));
-			$this->load->library(array('form_validation', 'session'));
 		}
 
-		public function render($content, $data = null){
-			$this->template['header']  = $this->load->view('layout/'.$this->layout.'/header', $data, TRUE);
-            $this->template['content'] = $this->load->view($content, $data, TRUE);
-            $this->template['footer']  = $this->load->view('layout/'.$this->layout.'/footer', $data, TRUE);
+		public function render($content, $data = array()){
+
+			$this->data = array_merge($data, $this->data);
+			$this->template['header']  = $this->load->view('layout/'.$this->layout.'/header', $this->data, TRUE);
+            $this->template['content'] = $this->load->view($content, $this->data, TRUE);
+            $this->template['footer']  = $this->load->view('layout/'.$this->layout.'/footer', $this->data, TRUE);
 
             return $this->load->view('layout/'.$this->layout.'/template', $this->template);
 			

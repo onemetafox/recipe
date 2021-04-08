@@ -1,15 +1,20 @@
 <?php
 	defined('BASEPATH') or die('No direct access script allowed!');
 
+	require_once(APPPATH.'core/BaseController.php');
+
 	class CustomerController extends BaseController
 	{
         var $layout = "admin";
 		
 		public function __construct() {
-			$user = $this->session->userdata("user");
-			if($user || $user->role != 2){
-				redirect(base_url() . "welcome/index");
-			}
 			parent::__construct();
+			$user = $this->user_data();
+			if(!$user || $user["role"] != 2){
+				redirect("welcome/index");
+			}
+			$menus = $this->config->item("menus");
+			$this->data["menus"] = $menus['customer'];
+			$this->data["user"] = $user;
 		}
 	}

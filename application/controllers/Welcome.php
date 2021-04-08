@@ -86,6 +86,10 @@ class Welcome extends BaseController {
 		}
 	}
 
+	public function logout(){
+		$this->session->unset_userdata('user');
+		redirect("/");
+	}
 	public function login(){
 		$data = $this->input->post();
 		$this->load->model("User_model", "user");

@@ -16,24 +16,14 @@
             <div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
                 <!--begin::Header Nav-->
                 <ul class="menu-nav">
-                    <li class="menu-item menu-item-submenu menu-item-rel menu-item-active" data-menu-toggle="click" aria-haspopup="true">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <span class="menu-text">Pages</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                    </li>
-                    <li class="menu-item menu-item-submenu" data-menu-toggle="click" aria-haspopup="true">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <span class="menu-text">Features</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                    </li>
-                    <li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <span class="menu-text">Apps</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                    </li>
+                    <?php foreach($menus as $menu) {?>
+                        <li class="menu-item menu-item-submenu menu-item-rel menu-item-active" aria-haspopup="true">
+                            <a href="<?= base_url() . $menu["url"]?>" class="menu-link">
+                                <span class="menu-text"><?= $menu["name"]?></span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                        </li>
+                    <?php } ?>
                 </ul>
                 <!--end::Header Nav-->
             </div>
@@ -44,57 +34,93 @@
         <div class="topbar">
             <!--begin::User-->
             <div class="topbar-item">
-                <ul class="menu-nav">
-                    <li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <span class="menu-text">Apps</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu menu-submenu-classic menu-submenu-left">
-                            <ul class="menu-subnav">
-                                <li class="menu-item" aria-haspopup="true">
-                                    <a href="javascript:;" class="menu-link">
-                                        <span class="svg-icon menu-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Safe-chat.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24" />
-                                                    <path d="M8,17 C8.55228475,17 9,17.4477153 9,18 L9,21 C9,21.5522847 8.55228475,22 8,22 L3,22 C2.44771525,22 2,21.5522847 2,21 L2,18 C2,17.4477153 2.44771525,17 3,17 L3,16.5 C3,15.1192881 4.11928813,14 5.5,14 C6.88071187,14 8,15.1192881 8,16.5 L8,17 Z M5.5,15 C4.67157288,15 4,15.6715729 4,16.5 L4,17 L7,17 L7,16.5 C7,15.6715729 6.32842712,15 5.5,15 Z" fill="#000000" opacity="0.3" />
-                                                    <path d="M2,11.8650466 L2,6 C2,4.34314575 3.34314575,3 5,3 L19,3 C20.6568542,3 22,4.34314575 22,6 L22,15 C22,15.0032706 21.9999948,15.0065399 21.9999843,15.009808 L22.0249378,15 L22.0249378,19.5857864 C22.0249378,20.1380712 21.5772226,20.5857864 21.0249378,20.5857864 C20.7597213,20.5857864 20.5053674,20.4804296 20.317831,20.2928932 L18.0249378,18 L12.9835977,18 C12.7263047,14.0909841 9.47412135,11 5.5,11 C4.23590829,11 3.04485894,11.3127315 2,11.8650466 Z M6,7 C5.44771525,7 5,7.44771525 5,8 C5,8.55228475 5.44771525,9 6,9 L15,9 C15.5522847,9 16,8.55228475 16,8 C16,7.44771525 15.5522847,7 15,7 L6,7 Z" fill="#000000" />
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span>
-                                        <span class="menu-text">Reporting</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item" aria-haspopup="true">
-                                    <a href="javascript:;" class="menu-link">
-                                        <span class="svg-icon menu-icon">
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Safe-chat.svg-->
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24" />
-                                                    <path d="M8,17 C8.55228475,17 9,17.4477153 9,18 L9,21 C9,21.5522847 8.55228475,22 8,22 L3,22 C2.44771525,22 2,21.5522847 2,21 L2,18 C2,17.4477153 2.44771525,17 3,17 L3,16.5 C3,15.1192881 4.11928813,14 5.5,14 C6.88071187,14 8,15.1192881 8,16.5 L8,17 Z M5.5,15 C4.67157288,15 4,15.6715729 4,16.5 L4,17 L7,17 L7,16.5 C7,15.6715729 6.32842712,15 5.5,15 Z" fill="#000000" opacity="0.3" />
-                                                    <path d="M2,11.8650466 L2,6 C2,4.34314575 3.34314575,3 5,3 L19,3 C20.6568542,3 22,4.34314575 22,6 L22,15 C22,15.0032706 21.9999948,15.0065399 21.9999843,15.009808 L22.0249378,15 L22.0249378,19.5857864 C22.0249378,20.1380712 21.5772226,20.5857864 21.0249378,20.5857864 C20.7597213,20.5857864 20.5053674,20.4804296 20.317831,20.2928932 L18.0249378,18 L12.9835977,18 C12.7263047,14.0909841 9.47412135,11 5.5,11 C4.23590829,11 3.04485894,11.3127315 2,11.8650466 Z M6,7 C5.44771525,7 5,7.44771525 5,8 C5,8.55228475 5.44771525,9 6,9 L15,9 C15.5522847,9 16,8.55228475 16,8 C16,7.44771525 15.5522847,7 15,7 L6,7 Z" fill="#000000" />
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span>
-                                        <span class="menu-text">Reporting</span>
-                                    </a>
-                                </li>
-                            </ul>
+                <div class="dropdown">
+                    <!--begin::Toggle-->
+                    <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
+                        <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
+                            <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
+                            <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3"><?= $user["name"]?></span>
+                            <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
+                                <span class="symbol-label font-size-h5 font-weight-bold">S</span>
+                            </span>
                         </div>
-                    </li>
-                </ul>
-                <!-- <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
-                    <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                    <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">Sean</span>
-                    <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
-                        <span class="symbol-label font-size-h5 font-weight-bold">S</span>
-                    </span>
-                </div> -->
+                    </div>
+                    <!--end::Toggle-->
+                    <!--begin::Dropdown-->
+                    <div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
+                        <form>
+                            <!--begin::Header-->
+                            <div class="d-flex flex-column pt-12 bgi-size-cover bgi-no-repeat rounded-top" style="background-image: url(<?=asset_url()?>media/misc/bg-1.jpg)">
+                                <!--begin::Title-->
+                                <h4 class="d-flex flex-center rounded-top">
+                                    <a href="<?= base_url()?>welcome/logout"><span class="btn btn-text btn-outline-danger btn-sm font-weight-bold btn-font-md py-3 px-14">Log out</span></a>
+                                </h4>
+                                <!--end::Title-->
+                                <!--begin::Tabs-->
+                                <ul class="nav nav-bold nav-tabs nav-tabs-line nav-tabs-line-3x nav-tabs-line-transparent-white nav-tabs-line-active-border-success mt-3 px-8" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active show" data-toggle="tab" href="#topbar_notifications_events">Support</a>
+                                    </li>
+                                </ul>
+                                <!--end::Tabs-->
+                            </div>
+                            <!--end::Header-->
+                            <!--begin::Content-->
+                            <div class="tab-content">
+                                <!--begin::Tabpane-->
+                                <div class="tab-pane active show" id="topbar_notifications_events" role="tabpanel">
+                                    <!--begin::Nav-->
+                                    <div class="navi navi-hover scroll my-4" data-scroll="true" data-height="200" data-mobile-height="200">
+                                        <!--begin::Item-->
+                                        <a href="#" class="navi-item">
+                                            <div class="navi-link">
+                                                <div class="navi-icon mr-2">
+                                                    <i class="flaticon-download-1 text-danger"></i>
+                                                </div>
+                                                <div class="navi-text">
+                                                    <div class="font-weight-bold">Finance report</div>
+                                                    <div class="text-muted">User can see the invoice</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <!--end::Item-->
+                                        <!--begin::Item-->
+                                        <a href="#" class="navi-item">
+                                            <div class="navi-link">
+                                                <div class="navi-icon mr-2">
+                                                    <i class="flaticon-security text-warning"></i>
+                                                </div>
+                                                <div class="navi-text">
+                                                    <div class="font-weight-bold">Account setting</div>
+                                                    <div class="text-muted">Update user information</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <!--end::Item-->
+                                        <!--begin::Item-->
+                                        <a href="#" class="navi-item">
+                                            <div class="navi-link">
+                                                <div class="navi-icon mr-2">
+                                                    <i class="flaticon2-analytics-1 text-success"></i>
+                                                </div>
+                                                <div class="navi-text">
+                                                    <div class="font-weight-bold">Contact message</div>
+                                                    <div class="text-muted">Check the contact messages</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <!--end::Item-->
+                                    </div>
+                                    <!--end::Nav-->
+                                </div>
+                                <!--end::Tabpane-->
+                            </div>
+                            <!--end::Content-->
+                        </form>
+                    </div>
+                    <!--end::Dropdown-->
+                </div>
+                <!--  -->
             </div>
             <!--end::User-->
         </div>

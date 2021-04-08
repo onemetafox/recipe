@@ -38,7 +38,7 @@
                                 <span class="text-muted font-weight-bold font-size-sm mt-1">Change your account settings</span>
                             </div>
                             <div class="card-toolbar">
-                                <button type="reset" class="btn btn-success mr-2">Save Changes</button>
+                                <button type="reset" onclick ="save()"class="btn btn-success mr-2">Save Changes</button>
                             </div>
                         </div>
                         <!--end::Header-->
@@ -61,7 +61,7 @@
                                                     <i class="la la-user"></i>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control form-control-lg form-control-solid" value="nick" placeholder="User Name">
+                                            <input type="text" class="form-control form-control-lg form-control-solid" id="name" value="<?=$user["name"]?>" placeholder="User Name">
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                                     <i class="la la-at"></i>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control form-control-lg form-control-solid" value="nick.watson@loop.com" placeholder="Email">
+                                            <input type="text" class="form-control form-control-lg form-control-solid" id="email" value="<?= $user["email"]?>" placeholder="Email">
                                         </div>
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@
                                                     <i class="la la-lock"></i>
                                                 </span>
                                             </div>
-                                            <input type="password" class="form-control form-control-lg form-control-solid" value="" placeholder="Old Password">
+                                            <input type="password" class="form-control form-control-lg form-control-solid" id="old_pwd" value="" placeholder="Old Password">
                                         </div>
                                     </div>
                                 </div>
@@ -104,7 +104,7 @@
                                                     <i class="la la-lock"></i>
                                                 </span>
                                             </div>
-                                            <input type="password" class="form-control form-control-lg form-control-solid" value="" placeholder="New Password">
+                                            <input type="password" class="form-control form-control-lg form-control-solid" id="new_pwd" value="" placeholder="New Password">
                                         </div>
                                     </div>
                                 </div>
@@ -118,40 +118,42 @@
                                                     <i class="la la-lock"></i>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control form-control-lg form-control-solid" value="" placeholder="Confirm Password">
+                                            <input type="text" class="form-control form-control-lg form-control-solid" value="" id="cfm_pwd" placeholder="Confirm Password">
                                         </div>
                                     </div>
                                 </div>
-                                <!--begin::Form Group-->
-                                <div class="separator separator-dashed my-5"></div>
-                                <!--begin::Form Group-->
-                                <div class="row">
-                                    <label class="col-xl-3"></label>
-                                    <div class="col-lg-9 col-xl-6">
-                                        <h5 class="font-weight-bold mb-6">Premium:</h5>
-                                    </div>
-                                </div>
-                                <!--begin::Form Group-->
-                                <div class="form-group row">
-                                    <label class="col-xl-3 col-lg-3 col-form-label">Restaurant</label>
-                                    <div class="col-lg-9 col-xl-6">
-                                        <span>Restaurant name</span><br>
-                                        <span>Restaurant name</span><br>
-                                        <span>Restaurant name</span>
-                                        <!-- <p class="form-text text-muted pt-2">address</p> -->
-                                    </div>
-                                </div>
-                                <!--begin::Form Group-->
-                                <div class="form-group row">
-                                    <label class="col-xl-3 col-lg-3 col-form-label">Premium Level</label>
-                                    <div class="col-lg-9 col-xl-6">
-                                        <div class="checkbox-inline">
-                                            <span></span>Require personal information to reset your password.</label>
+                                <?php if($user["role"] != 1) {?>
+                                    <!--begin::Form Group-->
+                                    <div class="separator separator-dashed my-5"></div>
+                                    <!--begin::Form Group-->
+                                    <div class="row">
+                                        <label class="col-xl-3"></label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <h5 class="font-weight-bold mb-6">Premium:</h5>
                                         </div>
-                                        <p class="form-text text-muted py-2">For extra security, this requires you to confirm your email or phone number when you reset your password.
-                                        <a href="#" class="font-weight-boldk">Learn more</a>.</p>
                                     </div>
-                                </div>
+                                    <!--begin::Form Group-->
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">Restaurant</label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <span class="mb-7"><?= $restaurant["name"]?></span><br>
+                                            <span class="mb-7"><?= $restaurant["address"]?></span><br>
+                                            <span class="mb-7"><?= $restaurant["contact_info"]?></span>
+                                            <!-- <p class="form-text text-muted pt-2">address</p> -->
+                                        </div>
+                                    </div>
+                                    <!--begin::Form Group-->
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">Premium Level</label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <div class="checkbox-inline">
+                                                <span></span><?= $user["pay_type"]?></label>
+                                            </div>
+                                            <p class="form-text text-muted py-2">To make limitless recipe, you can upgrade your premium type.
+                                            <a href="#" class="font-weight-boldk">Learn more</a>.</p>
+                                        </div>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </form>
                         <!--end::Form-->
@@ -166,3 +168,28 @@
     </div>
     <!--end::Entry-->
 </div>
+<script>
+    function save(){
+        var formData = {
+            email: $("#Email").val(),
+            name: $("#name").val(),
+            old_pwd: $("#old_pwd").val(),
+            new_pwd: $("#new_pwd").val(),
+            cfm_pwd: $("#cfm_pwd").val()
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "<?=base_url()?>/users/update",
+            data: formData,
+            dataType: "json",
+            encode: true,
+        }).done(function (data) {
+            
+
+          
+            
+        });
+       
+    }
+</script>

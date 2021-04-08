@@ -23,6 +23,7 @@
 		<link href="<?=asset_url()?>css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
 		<link href="<?=asset_url()?>css/themes/layout/brand/light.css" rel="stylesheet" type="text/css" />
 		<link href="<?=asset_url()?>css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<!--end::Layout Themes-->
 		<link rel="shortcut icon" href="<?=asset_url()?>media/logos/favicon.ico" />
 	</head>
@@ -35,13 +36,6 @@
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
                     <?php
-                        // defined('BASEPATH') OR exit('No direct script access allowed');
-                        // header('X-Powered-By: Prod-domProjects.com');
-                        // header('X-XSS-Protection: 1');
-                        // header('X-Frame-Options: SAMEORIGIN');
-                        // header('X-Content-Type-Options: nosniff');
-                        // header('Vary: Accept-Encoding');
-
                         if (isset($header))
                         {
                             echo $header;
@@ -51,12 +45,6 @@
                         {
                             echo $content;
                         }
-                        // $this->load->view("landing/condition");
-                        // if (isset($control_sidebar) AND $admin_prefs['ctrl_sidebar'] == TRUE)
-                        // {
-                        //     echo $control_sidebar;
-                        // }
-
                         if (isset($footer))
                         {
                             echo $footer;
