@@ -1,11 +1,9 @@
 <?php
 	defined('BASEPATH') or die('No direct access script allowed!');
 
-	class BaseController extends CI_Controller
+	class AdminController extends BaseController
 	{
-        var $layout = "";
-		var $page_title = "";
-		var $data = [];
+        var $layout = "admin";
 		public function __construct() {
 			parent::__construct();
 			$user = $this->session->userdata("user");

@@ -87,9 +87,9 @@
               if (data["success"] == true ){
                 var user = data["user"];
                 if(user.role == 1){
-                  window.location = "<?=base_url()?>admin";
+                  window.location = "<?=base_url()?>users/profile";
                 }else{
-                  window.location = "<?=base_url()?>dashboard";
+                  window.location = "<?=base_url()?>users/profile";
                 }
               }else{
                 $(".error-message > div").html(data["msg"]);

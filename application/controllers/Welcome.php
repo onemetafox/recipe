@@ -30,7 +30,7 @@ class Welcome extends BaseController {
 	public function index()
 	{
 		$data["page_title"] = "Recipe";
-		$this->load->view("index", $data);
+		$this->load->view("index", $data);		
 	}
 	
 	public function signin(){

@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require_once(APPPATH.'core/AdminController.php');
+require_once(APPPATH.'core/CustomerController.php');
 
-class Category extends AdminController {
+class Category extends CustomerController {
 	
 	var $layout = "customer";
 

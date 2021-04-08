@@ -3,7 +3,7 @@
 
 	class CustomerController extends BaseController
 	{
-        var $layout = "customer";
+        var $layout = "admin";
 		
 		public function __construct() {
 			$user = $this->session->userdata("user");
