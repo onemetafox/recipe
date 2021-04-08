@@ -59,13 +59,14 @@ class Welcome extends BaseController {
 	}
 	public function signup(){
 		$user = $this->user_data();
+		$data["restaurants"] = $this->restaurant->getAll();
 		if($user){
-			if($user->role == "1")
+			if($user['role'] == "1")
 				redirect(base_url() . "admin");
 			else
 				redirect(base_url() . "dashboard");
 		}else{
-			$this->load->view("signup");
+			$this->load->view("signup",$data);
 		}
 	}
 	public function register(){
@@ -78,8 +79,10 @@ class Welcome extends BaseController {
 			}else{
 				unset($data["cfm_password"]);
 				$data["password"] = md5($data["password"]);
-				$this->user->setData($data);
-				$this->json(array("success"=>true, "msg"=>"Your account is created."));
+				$data["register_date"] = date("Y-m-d");
+				// $id = $this->user->setData($data);
+				$id = 10;
+				$this->json(array("success"=>true, "msg"=>"Your account is created.", "user_id"=>$id));
 			}
 		}else{
 			$this->json(array("success"=>false, "msg"=>"Password does not match!"));

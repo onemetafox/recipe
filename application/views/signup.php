@@ -120,9 +120,43 @@
       </div>
     </div>
   </div>
+  <!-- Modal-->
+  <div class="modal fade" id="exampleModalCustomScrollable" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <i aria-hidden="true" class="ki ki-close"></i>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <div data-scroll="true" data-height="300">
+                    <div class="form-group">
+                      <label for="exampleSelect1">Example select
+                      <span class="text-danger">*</span></label>
+                      <select class="form-control" id="restaurant">
+                        <?php foreach($restaurants as $restaurant) {?>
+                          <option value="<?= $restaurant->id?>"><?= $restaurant->name?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="checkbox checkbox-lg">
+                      <input type="checkbox" name="Checkboxe" id="checkbox"/>
+                      <span></span>Option 1</label>
+                    </div>
+                  <div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary font-weight-bold">Save changes</button>
+              </div>
+          </div>
+      </div>
+  </div>
   <script>
     $(document).ready(function () {
-        
         $("form").submit(function (event) {
             var formData = {
                 name: $("#Name").val(),

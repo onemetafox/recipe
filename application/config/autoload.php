@@ -137,5 +137,6 @@ $autoload['model'] = array(
     'User_model' =>'user',
     'Restaurant_model' => 'restaurant',
     'Recipe_model' => 'recipe',
-    'Category_model' => 'category'
+    'Category_model' => 'category',
+    'Ingredient_model' => 'ingredient'
 );

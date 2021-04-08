@@ -15,6 +15,7 @@
 		}
 		public function setData($data) {
 			$query = $this->db->insert($this->table, $data);
+			return $this->db->insert_id();
 		}
 
 		public function getAll() {

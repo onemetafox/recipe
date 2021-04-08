@@ -13,13 +13,13 @@ var KTDatatableRemoteAjaxDemo = function() {
     // basic demo
     var demo = function() {
 
-        var datatable = $('#ingredient').KTDatatable({
+        var datatable = $('#menu').KTDatatable({
             // datasource definition
             data: {
                 type: 'remote',
                 source: {
                     read: {
-                        url: HOST_URL + 'customer/ingredient/api',
+                        url: HOST_URL + 'customer/menu/api',
                         // sample custom headers
                         headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
                         map: function(raw) {

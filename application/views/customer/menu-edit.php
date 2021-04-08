@@ -15,7 +15,7 @@
                 <!--end::Separator-->
                 <!--begin::Search Form-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">Enter recipe details and submit</span>
+                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">Enter menu details and submit</span>
                 </div>
                 <!--end::Search Form-->
             </div>
@@ -23,7 +23,7 @@
             <!--begin::Toolbar-->
             <div class="d-flex align-items-center">
                 <!--begin::Button-->
-                <a href="<?= base_url()?>customer/recipe" class="btn btn-default font-weight-bold btn-sm px-10 font-size-base">Back</a>
+                <a href="<?= base_url()?>customer/menu" class="btn btn-default font-weight-bold btn-sm px-10 font-size-base">Back</a>
                 <!--end::Button-->
             </div>
             <!--end::Toolbar-->
@@ -46,8 +46,8 @@
                                     <div class="wizard-wrapper">
                                         <div class="wizard-number">1</div>
                                         <div class="wizard-label">
-                                            <div class="wizard-title">Recipe</div>
-                                            <div class="wizard-desc">Recipe's Information</div>
+                                            <div class="wizard-title">Menu</div>
+                                            <div class="wizard-desc">Menu's Information</div>
                                         </div>
                                     </div>
                                 </div>
@@ -55,8 +55,8 @@
                                     <div class="wizard-wrapper">
                                         <div class="wizard-number">2</div>
                                         <div class="wizard-label">
-                                            <div class="wizard-title">Ingredients</div>
-                                            <div class="wizard-desc">Ingredients information</div>
+                                            <div class="wizard-title">Recipes</div>
+                                            <div class="wizard-desc">Recipes information</div>
                                         </div>
                                     </div>
                                 </div>
@@ -75,24 +75,7 @@
                                                 <div class="col-xl-12">
                                                     <!--begin::Wizard Step 1-->
                                                     <div class="my-5 step" data-wizard-type="step-content" data-wizard-state="current">
-                                                        <h5 class="text-dark font-weight-bold mb-10">Recipe's Details:</h5>
-                                                        <!--begin::Group-->
-                                                        <div class="form-group row">
-                                                            <div class="col-lg-12 col-xl-12 text-center">
-                                                                <div class="image-input image-input-outline" id="kt_user_add_avatar">
-                                                                    <div class="image-input-wrapper" style="background-image: url(assets/media/users/100_6.jpg)"></div>
-                                                                    <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-                                                                        <i class="fa fa-pen icon-sm text-muted"></i>
-                                                                        <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
-                                                                        <input type="hidden" name="profile_avatar_remove">
-                                                                    </label>
-                                                                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="" data-original-title="Cancel avatar">
-                                                                        <i class="ki ki-bold-close icon-xs text-muted"></i>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Group-->
+                                                        <h5 class="text-dark font-weight-bold mb-10">Menu's Details:</h5>
                                                         <!--begin::Group-->
                                                         <div class="form-group row fv-plugins-icon-container">
                                                             <label class="col-xl-3 col-lg-3 col-form-label">Recipe Name</label>
