@@ -73,7 +73,7 @@
           <i aria-hidden="true" class="ki ki-close"></i>
         </button>
       </div>
-      <form class="form">
+      <form class="form" id ="form">
         <div class="modal-body">
           <div class="form-group row">
             <label class="col-form-label text-right col-lg-3 col-sm-12">Restaurant Name</label>
@@ -99,13 +99,13 @@
           <div class="form-group row">
             <label class="col-form-label text-right col-lg-3 col-sm-12">Description</label>
             <div class="col-lg-9 col-md-9 col-sm-12">
-              <textarea name="" id="" cols="30" rows="10" name="description" id="description"></textarea>
+              <textarea class="col-lg-12 col-xl-12" cols="30" rows="10" name="content" id="content"></textarea>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary mr-2" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-secondary">Save</button>
+          <button type="button" class="btn btn-secondary px-15 mr-2" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary px-15">Save</button>
         </div>
       </form>
     </div>

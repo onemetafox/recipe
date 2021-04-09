@@ -16,4 +16,19 @@ class Restaurant extends AdminController {
 	public function api(){
 		$this->json($this->restaurant->all());
 	}
+
+	public function save(){
+		$data = $this->input->post();
+		$user = $this->user_data();
+		$data["user_id"] = $user["id"];
+		$data["created_date"] = date("Y-m-d h:s:i");
+		if(isset($data["id"])){
+			$this->restaurant->updateData($data);
+			$this->json(array("success" => true, "msg"=>"Success!"));
+		}else{
+			$this->restaurant->setData($data);
+			$this->json(array("success" => true, "msg"=>"Success!"));
+		}
+		
+	}
 }

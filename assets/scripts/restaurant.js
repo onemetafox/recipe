@@ -116,71 +116,37 @@ var KTDatatableRemoteAjaxDemo = function() {
 		// });
         // $('#kt_datatable_search_status, #kt_datatable_search_type').selectpicker();
     };
-    var formSubmit = function (){
-        $('form').validate({
-            rules: {
-                name: {
-                    required: true
-                },
-                address: {
-                    required: true,
-                },
-                contact_info: {
-                    required: true,
-                }
-            },
-            messages: {
-                name: {
-                    required: "Please enter restaurant name."
-                },
-                address: {
-                    required: "Please enter restaurant address."
-                },
-                contact_info: {
-                    required: "Please enter contact info."
-                }, //<---unnecessary, remove it
-
-            },
-            errorElement: "em",
-            errorPlacement: function ( error, element ) {
-                // Add the `help-block` class to the error element
-                error.addClass( "help-block" );
-
-                if ( element.prop( "type" ) === "checkbox" ) {
-                    error.insertAfter( element.parent( "label" ) );
-                } else {
-                    error.insertAfter( element );
-                }
-            },
-            highlight: function ( element, errorClass, validClass ) {
-                $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
-            },
-            //Submit Handler Function
-            submitHandler: function (form) {
-                var postData = $(this).serializeArray();
-                // var formURL = $(this).attr("action");
-                $.ajax({
-                    type: "POST",
-                    url: HOST_URL + 'admin/restaurant/save',
-                    data: postData,
-                    success:function(data) {
-                    
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                    
-                    }
-                });
-            }
+    var temp = function (){
+        $("form").submit(function (event) {
+            var formData = {
+                name: $("#name").val(),
+                address: $("#address").val(),
+                contact_info: $("#contact_info").val(),
+                content: $("#content").val(),
+            };
+            $.ajax({
+                type: "POST",
+                url: HOST_URL + "admin/restaurant/save",
+                data: formData,
+                dataType: "json",
+                encode: true,
+            }).done(function (data) {
+                if (data["success"] == true ){
+                    toastr.success(data["msg"]);
+                    $("#kt_select2_modal").modal('hide');
+                }else{
+               
+              }
+              
+            });
+            event.preventDefault();
         });
     }
     return {
         // public functions
         init: function() {
             demo();
-            formSubmit();
+            temp();
         },
     };
 }();

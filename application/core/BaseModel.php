@@ -56,11 +56,11 @@
 		}
 
 		public function updateData($data) {
-			$set = array(
-				'name' 	 => $data['name'],
-				'status' => $data['status']
-			);
-			$query = $this->db->set($set)
+			// $set = array(
+			// 	'name' 	 => $data['name'],
+			// 	'status' => $data['status']
+			// );
+			$query = $this->db->set($data)
 							  ->where('id', $data['id'])
 							  ->update($this->table);
 		}
