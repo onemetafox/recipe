@@ -79,9 +79,9 @@ class Welcome extends BaseController {
 			}else{
 				unset($data["cfm_password"]);
 				$data["password"] = md5($data["password"]);
-				$data["register_date"] = date("Y-m-d");
-				// $id = $this->user->setData($data);
-				$id = 10;
+				$data["register_date"] = date("Y-m-d h:s:i");
+				$data["email"] = strtolower($data["email"]);
+				$id = $this->user->setData($data);
 				$this->json(array("success"=>true, "msg"=>"Your account is created.", "user_id"=>$id));
 			}
 		}else{
@@ -96,7 +96,7 @@ class Welcome extends BaseController {
 	public function login(){
 		$data = $this->input->post();
 		$this->load->model("User_model", "user");
-		$user = $this->user->getOneByParam(array("email" => $data["email"]));
+		$user = $this->user->getOneByParam(array("email" => strtolower($data["email"])));
 		if($user){
 			if($user["password"] == md5($data["password"])){
 				$this->session->set_userdata("user",$user);

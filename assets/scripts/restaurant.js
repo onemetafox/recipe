@@ -150,6 +150,7 @@ var KTDatatableRemoteAjaxDemo = function() {
                 address: $("#address").val(),
                 contact_info: $("#contact_info").val(),
                 content: $("#content").val(),
+                id: $("#id").val(),
             };
             $.ajax({
                 type: "POST",
