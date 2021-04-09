@@ -23,7 +23,7 @@ class Restaurant extends AdminController {
 		$user = $this->user_data();
 		// $data["user_id"] = $user["id"];
 		$data["created_date"] = date("Y-m-d h:s:i");
-		if(isset($data["id"])){
+		if($data["id"]){
 			$this->restaurant->updateData($data);
 			$this->json(array("success" => true, "msg"=>"Success!"));
 		}else{

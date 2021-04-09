@@ -124,6 +124,12 @@ var KTDatatableRemoteAjaxDemo = function() {
             }],
 
         });
+        $("#new_btn").on("click", function(){
+            // $('#form')[0].reset();
+            $("#id").val("");
+            $('#form').trigger("reset");
+            $("#kt_select2_modal").modal('show');
+        });
 		// $('#kt_datatable_search_status').on('change', function() {
         //     datatable.search($(this).val().toLowerCase(), 'category');
         // });

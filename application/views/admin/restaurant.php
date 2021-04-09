@@ -17,7 +17,7 @@
             <!--begin::Toolbar-->
             <div class="d-flex align-items-center">
                 <!--begin::Actions-->
-                <a href="" class="btn btn-light-primary font-weight-bolder btn-sm" data-toggle="modal" data-target="#kt_select2_modal">Add New Restaurant</a>
+                <a class="btn btn-light-primary font-weight-bolder btn-sm" id="new_btn">Add New Restaurant</a>
                 <!--end::Actions-->
             </div>
             <!--end::Toolbar-->

@@ -1,36 +1,20 @@
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-    <!--begin::Subheader-->
     <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
         <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-            <!--begin::Info-->
             <div class="d-flex align-items-center flex-wrap mr-1">
-                <!--begin::Page Heading-->
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
-                    <!--begin::Page Title-->
                     <h5 class="text-dark font-weight-bold my-1 mr-5"><?=$page_title?></h5>
-                    <!--end::Page Title-->
                 </div>
-                <!--end::Page Heading-->
             </div>
-            <!--end::Info-->
-            <!--begin::Toolbar-->
             <div class="d-flex align-items-center">
-                <!--begin::Actions-->
-                <button id = "new_btn" class="btn btn-light-primary font-weight-bolder btn-sm">Add New User</a>
-                <!--end::Actions-->
+            <a class="btn btn-light-primary font-weight-bolder btn-sm" id="new_btn">Add New User</a>
             </div>
-            <!--end::Toolbar-->
         </div>
     </div>
-    <!--end::Subheader-->
-    <!--begin::Entry-->
     <div class="d-flex flex-column-fluid">
-        <!--begin::Container-->
         <div class="container">
-            <!--begin::Card-->
             <div class="card card-custom">
                 <div class="card-body">
-                    <!--begin::Search Form-->
                     <div class="mb-7">
                         <div class="row align-items-center">
                             <div class="col-lg-3 col-xl-3">
@@ -59,7 +43,7 @@
                             <div class="col-md-3 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">Restaurant:</label>
-                                    <select class="form-control" id="kt_datatable_search_type">
+                                    <select class="form-control" id="kt_datatable_search_status">
                                         <option value="">All</option>
                                         <?php foreach($restaurants as $restaurant) { ?>
                                             <option value="<?= $restaurant->id?>"><?= $restaurant->name?></option>
@@ -72,19 +56,12 @@
                             </div>
                         </div>
                     </div>
-                    <!--end::Search Form-->
-                    <!--begin: Datatable-->
                     <div class="datatable datatable-bordered datatable-head-custom" id="users"></div>
-                    <!--end: Datatable-->
                 </div>
             </div>
-            <!--end::Card-->
         </div>
-        <!--end::Container-->
     </div>
-    <!--end::Entry-->
 </div>
-
 
 <!--begin::Modal-->
 <div class="modal fade" id="kt_select2_modal" role="dialog" aria-hidden="true">
@@ -99,6 +76,7 @@
       <form class="form" id ="form">
         <div class="modal-body">
           <div class="form-group row">
+            <input type="hidden" id="id" name="id">
             <label class="col-form-label text-right col-lg-3 col-sm-12">User Name</label>
             <div class="col-lg-9 col-md-9 col-sm-12">
                 <input class="form-control form-control-solid form-control-lg" name="name" id="name" type="text" value="" required>
@@ -116,11 +94,11 @@
             <label class="col-form-label text-right col-lg-3 col-sm-12">Restaurant</label>
             <div class="col-lg-9 col-md-9 col-sm-12">
                 <select class="form-control" id="kt_datatable_search_type">
-                    <option value="">All</option>
-                    <?php foreach($restaurants as $restaurant) { ?>
-                        <option value="<?= $restaurant->id?>"><?= $restaurant->name?></option>
-                    <?php } ?>
-                </select>
+                <option value="">All</option>
+                <?php foreach($restaurants as $restaurant) { ?>
+                    <option value="<?= $restaurant->id?>"><?= $restaurant->name?></option>
+                <?php } ?>
+            </select>
             </div>
           </div>
         </div>

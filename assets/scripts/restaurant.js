@@ -130,6 +130,12 @@ var KTDatatableRemoteAjaxDemo = function() {
             }],
 
         });
+        $("#new_btn").on("click", function(){
+            // $('#form')[0].reset();
+            $("#id").val("");
+            $('#form').trigger("reset");
+            $("#kt_select2_modal").modal('show');
+        });
         // datatable.on('click', 'tbody tr .edit_btn', function() {
 		// 	// $(this).parents('tr').toggleClass('active');
         //     var data_row = datatable.row($(this).closest('td')).data();

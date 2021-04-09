@@ -59,5 +59,6 @@ class Users extends AdminController {
 		$data = $this->input->post();
 		$data["password"] = md5("123456789");
 		$this->user->updateData($data);
+		$this->json(array("success"=>true, "msg"=>"Password set 123456789"));
 	}
 }
