@@ -80,7 +80,7 @@ var KTDatatableRemoteAjaxDemo = function() {
                 field: 'type',
                 title: 'Type',
                 template:function(row){
-                    if(row.type == 1){
+                    if(row.pay_type == 1){
                         return '<span class="label label-xl label-inline label-light-success">Monthly Premium</span>'
                     }else if(row.type == 2 ){
                         return '<span class="label label-xl label-inline label-light-warning">Yearly Premium</span>'

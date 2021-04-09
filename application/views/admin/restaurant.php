@@ -74,6 +74,7 @@
         </button>
       </div>
       <form class="form" id ="form">
+        <input type= "hidden" id="id" name="id">
         <div class="modal-body">
           <div class="form-group row">
             <label class="col-form-label text-right col-lg-3 col-sm-12">Restaurant Name</label>

@@ -10,6 +10,10 @@
 		public function all($filter = null){
 			$this->db->join("user","user.id = restaurant.user_id", "LEFT");
 			$this->db->select("restaurant.*, user.name user_name");
-			return parent::getAll();
+			if(isset($filter["rest_id"])){
+				$this->db->where("restaurant.id", $filter["rest_id"]);
+				unset($filter["rest_id"]);
+			}
+			return parent::getDataByParam($filter);
 		}
 	}

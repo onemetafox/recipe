@@ -33,7 +33,7 @@
                     <!--begin::Search Form-->
                     <div class="mb-7">
                         <div class="row align-items-center">
-                            <div class="col-lg-4 col-xl-4">
+                            <div class="col-lg-3 col-xl-3">
                                 <div class="row align-items-center">
                                     <div class="col-md-12 my-2 my-md-0">
                                         <div class="input-icon">
@@ -45,9 +45,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="col-md-4 my-2 my-md-0">
+                            <div class="col-md-3 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
+                                    <label class="mr-3 mb-0 d-none d-md-block">Payment:</label>
+                                    <select class="form-control" id="kt_datatable_search_type">
+                                        <option value="">All</option>
+                                        <option value="0">None Payment</option>
+                                        <option value="1">Monthly Payment</option>
+                                        <option value="2">Yearly Payment</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3 my-2 my-md-0">
+                                <div class="d-flex align-items-center">
+                                    <label class="mr-3 mb-0 d-none d-md-block">Restaurant:</label>
                                     <select class="form-control" id="kt_datatable_search_type">
                                         <option value="">All</option>
                                         <?php foreach($restaurants as $restaurant) { ?>
@@ -55,8 +66,8 @@
                                         <?php } ?>
                                     </select>
                                 </div>
-                            </div> -->
-                            <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
+                            </div>
+                            <div class="col-lg-3 col-xl-3 mt-5 mt-lg-0">
                                 <button id="search_btn" class="btn btn-light-primary px-6 font-weight-bold">Search</button>
                             </div>
                         </div>
@@ -73,6 +84,55 @@
     </div>
     <!--end::Entry-->
 </div>
+
+
+<!--begin::Modal-->
+<div class="modal fade" id="kt_select2_modal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i aria-hidden="true" class="ki ki-close"></i>
+        </button>
+      </div>
+      <form class="form" id ="form">
+        <div class="modal-body">
+          <div class="form-group row">
+            <label class="col-form-label text-right col-lg-3 col-sm-12">User Name</label>
+            <div class="col-lg-9 col-md-9 col-sm-12">
+                <input class="form-control form-control-solid form-control-lg" name="name" id="name" type="text" value="" required>
+                <div class="fv-plugins-message-container"></div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label text-right col-lg-3 col-sm-12">Email</label>
+            <div class="col-lg-9 col-md-9 col-sm-12">
+              <input type="email" class="form-control form-control-solid form-control-lg" name="email" id="email" value="" required>
+              <div class="fv-plugins-message-container"></div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label text-right col-lg-3 col-sm-12">Restaurant</label>
+            <div class="col-lg-9 col-md-9 col-sm-12">
+                <select class="form-control" id="kt_datatable_search_type">
+                    <option value="">All</option>
+                    <?php foreach($restaurants as $restaurant) { ?>
+                        <option value="<?= $restaurant->id?>"><?= $restaurant->name?></option>
+                    <?php } ?>
+                </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary px-15 mr-2" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary px-15">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--end::Modal-->
 <script src="<?= asset_url()?>scripts/user.js"></script>
 <script>
     var HOST_URL = '<?= base_url()?>';
