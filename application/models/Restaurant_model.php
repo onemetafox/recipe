@@ -6,4 +6,10 @@
 	class Restaurant_model extends BaseModel
 	{
 		var $table = 'restaurant';
+
+		public function all($filter = null){
+			$this->db->join("user","user.id = restaurant.user_id", "LEFT");
+			$this->db->select("restaurant.*, user.name user_name");
+			return parent::getAll();
+		}
 	}

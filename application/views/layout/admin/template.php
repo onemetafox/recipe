@@ -23,7 +23,8 @@
 		<link href="<?=asset_url()?>css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
 		<link href="<?=asset_url()?>css/themes/layout/brand/light.css" rel="stylesheet" type="text/css" />
 		<link href="<?=asset_url()?>css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
-		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 		<!--end::Layout Themes-->
 		<link rel="shortcut icon" href="<?=asset_url()?>media/logos/favicon.ico" />
 	</head>

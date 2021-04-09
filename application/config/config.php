@@ -518,7 +518,9 @@ $config['proxy_ips'] = '';
 
 $config['menus'] = array(
     'admin' => array(
-        array('name'=>"Users", "url"=>"users/index")
+        array('name'=>"Users", "url"=>"admin/users/index/user"),
+        array('name'=>"Admin", "url"=>"admin/users/index/admin"),
+        array('name'=>"Restaurant", "url"=>"admin/restaurant")
     ),
     'customer' =>array(
         array('name' => "Recipes", "url" =>"customer/recipe"),

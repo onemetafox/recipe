@@ -7,10 +7,13 @@
 	{
         var $layout = "admin";
 		public function __construct() {
-			// $user = $this->session->userdata("user");
-			// if($user->role != 1){
-			// 	redirect("/");
-			// }
 			parent::__construct();
+			$user = $this->user_data();
+			if(!$user || $user["role"] != 1){
+				redirect("welcome/index");
+			}
+			$menus = $this->config->item("menus");
+			$this->data["menus"] = $menus['admin'];
+			$this->data["user"] = $user;
 		}
 	}
