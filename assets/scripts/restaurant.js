@@ -133,7 +133,8 @@ var KTDatatableRemoteAjaxDemo = function() {
             }).done(function (data) {
                 if (data["success"] == true ){
                     toastr.success(data["msg"]);
-                    $("#kt_select2_modal").modal('hide');
+                    $("#kt_select2_modal").modal('toogle');
+                    datatable.reload()
                 }else{
                
               }
