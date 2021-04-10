@@ -142,18 +142,19 @@ jQuery(document).ready(function() {
 ;
 //# sourceMappingURL=data-ajax.js.map
 function addIngredient(name, code, allergen){
-    var str =   '<div class="d-flex align-items-center bg-light-success rounded p-3 mb-2">\
-                    <div class="d-flex flex-column flex-grow-1 mr-2">\
-                        <span class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1" name="name">'+name+'</span>\
-                        <span class="text-muted font-size-sm" name="code">'+code+', '+allergen+'</span>\
-                    </div>\
-                    <a href="javascript:clicking($(this))"><i class="flaticon2-cross text-danger"></i></a>\
-                </div>'
-    $(".ingredients").append(str);
+    if(!(code in ingredients)){
+        ingredients[code] = arguments;
+        var str =   '<div class="d-flex align-items-center bg-light-success rounded p-3 mb-2" name="'+code+'">\
+                        <div class="d-flex flex-column flex-grow-1 mr-2">\
+                            <span class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1" name="name">'+name+'</span>\
+                            <span class="text-muted font-size-sm" name="code">'+code+', '+allergen+'</span>\
+                        </div>\
+                        <a href="javascript:clicking('+code+')"><i class="flaticon2-cross text-danger"></i></a>\
+                    </div>'
+        $(".ingredients").append(str);
+    }
 }
-function clicking(index){
-    console.log(index.parent().class);
-
-    var data = index.parentNode.nodeName;
-    // $(this).parent().prevAll().length
+function clicking(code){
+    delete ingredients[code];
+    $("div[name="+code+"]").remove();
 }

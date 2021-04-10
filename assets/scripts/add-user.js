@@ -1,3 +1,4 @@
+var ingredients = {};
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 var __webpack_exports__ = {};
@@ -77,7 +78,41 @@ var KTAddUser = function () {
 				}
 			}).then(function (result) {
 				if (result.value) {
-					_formEl.submit(); // Submit form
+					var fd = new FormData();
+					console.log(fd);
+					var files = $('#image')[0].files;
+					if(jQuery.isEmptyObject(ingredients)){
+						toastr.error("Please select ingredients");
+						return;
+					}
+					// Check file selected or not
+					if(files.length > 0 ){
+					   fd.append('file',files[0]);
+					}else{
+						toastr.error("Please select a file.");
+						return;
+					}
+			
+					$.ajax({
+						url: HOST_URL + 'customer/recipe/save',
+						type: 'post',
+						data: {
+							formdata : fb,
+							ingredient: ingredients
+						},
+						contentType: false,
+						processData: false,
+						success: function(response){
+							if(response != 0){
+							$("#img").attr("src",response); 
+							$(".preview img").show(); // Display image element
+							}else{
+							alert('file not uploaded');
+							}
+						},
+					});
+					
+					wizard.preventDefault();   
 				} else if (result.dismiss === 'cancel') {
 					Swal.fire({
 						text: "Your form has not been submitted!.",

@@ -76,11 +76,12 @@ class Recipe extends CustomerController {
 	}
 	public function save(){
 		$data = $this->input->post();
-		$user = $this->user_data();
-		$recipe = $this->recipe->getDataByParam(array("user_id" => $user["id"]));
-		if($user["type"] == 0 && count($recipe) == 10){
-			$this->json(array("success"=>false, "msg"=> "You can't add more recipe"));
-			return;
-		}
+		print_r($data);
+		// $user = $this->user_data();
+		// $recipe = $this->recipe->getDataByParam(array("user_id" => $user["id"]));
+		// if($user["type"] == 0 && count($recipe) == 10){
+		// 	$this->json(array("success"=>false, "msg"=> "You can't add more recipe"));
+		// 	return;
+		// }
 	}
 }
