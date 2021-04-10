@@ -133,13 +133,31 @@
                                                                 <div class="row">
                                                                     <div class="col-lg-3">
                                                                         <div class="mt-3">
-                                                                            <ul class="navi navi-bold navi-hover my-5" role="tablist">
+                                                                            <ul class="navi navi-bold navi-hover my-5 ingredients" role="tablist">
                                                                                 <li class="navi-item">
-                                                                                    <a class="navi-link active" data-toggle="tab" href="#kt_profile_tab_personal_information">
-                                                                                        <span class="navi-text">Personal Information</span>
-                                                                                        <span class="navi-icon">
-                                                                                            <i class="flaticon2-cross"></i>
-                                                                                        </span>
+                                                                                    <a href="#" class="navi-item">
+                                                                                        <div class="navi-link">
+                                                                                            <div class="navi-text">
+                                                                                                <div class="font-weight-bold">Finance report</div>
+                                                                                                <div class="text-muted">User can see the invoice</div>
+                                                                                            </div>
+                                                                                            <div class="navi-icon mr-2">
+                                                                                                <i class="flaticon2-cross text-danger"></i>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li class="navi-item">
+                                                                                    <a href="#" class="navi-item">
+                                                                                        <div class="navi-link">
+                                                                                            <div class="navi-text">
+                                                                                                <div class="font-weight-bold">Finance report</div>
+                                                                                                <div class="text-muted">User can see the invoice</div>
+                                                                                            </div>
+                                                                                            <div class="navi-icon mr-2">
+                                                                                                <i class="flaticon2-cross text-danger"></i>
+                                                                                            </div>
+                                                                                        </div>
                                                                                     </a>
                                                                                 </li>
                                                                             </ul>
@@ -148,7 +166,6 @@
                                                                     <div class="col-lg-9">
                                                                         <div class="card-body">
                                                                             <!--begin: Search Form-->
-                                                                            <!--begin::Search Form-->
                                                                             <div class="mb-7">
                                                                                 <div class="row align-items-center">
                                                                                     <div class="col-lg-9 col-xl-8">
@@ -161,17 +178,6 @@
                                                                                                     </span>
                                                                                                 </div>
                                                                                             </div>
-                                                                                            <div class="col-md-5 my-2 my-md-0">
-                                                                                                <div class="d-flex align-items-center">
-                                                                                                    <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
-                                                                                                    <select class="form-control" id="kt_datatable_search_status">
-                                                                                                        <option value="">All</option>
-                                                                                                        <?php foreach($categories as $category) { ?>
-                                                                                                            <option value="<?= $category->name?>"><?= $category->name?></option>
-                                                                                                        <?php } ?>
-                                                                                                    </select>
-                                                                                                </div>
-                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
@@ -180,7 +186,6 @@
                                                                                 </div>
                                                                             </div>
                                                                             <!--end::Search Form-->
-                                                                            <!--end: Search Form-->
                                                                             <!--begin: Datatable-->
                                                                             <div class="datatable datatable-bordered datatable-head-custom" id="ingredient"></div>
                                                                             <!--end: Datatable-->
@@ -225,25 +230,5 @@
 <script src="<?= asset_url()?>scripts/add-user.js"></script>
 <script src="<?= asset_url()?>scripts/ingredient.js"></script>
 <script>
-    var HOST_URL = '<?= base_url()?>';
-    var KTSelect2 = function() {
-       // Private functions
-        var demos = function() {
-            $('#kt_select2_11').select2({
-                placeholder: "Add catetory",
-                tags: true
-            });
-        }
-        return {
-            init: function() {
-                demos();
-            }
-        };
-    }();
-
-      // Initialization
-    jQuery(document).ready(function() {
-        KTSelect2.init();
-    });
-    
+    var HOST_URL = '<?= base_url()?>';    
 </script>

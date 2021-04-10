@@ -61,7 +61,8 @@
 							  ->update($this->table);
 		}
 		public function counts($filter){
-			$this->where($filter);
+			if($filter)
+				$this->where($filter);
 			return $this->db->count_all_results($this->table);
 		}
 	}

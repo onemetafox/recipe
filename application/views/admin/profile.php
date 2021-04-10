@@ -48,7 +48,7 @@
                                     </div>
                                 </div>
                                 
-                                <!-- <div class="form-group row">
+                                <div class="form-group row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">Email Address</label>
                                     <div class="col-lg-9 col-xl-6">
                                         <div class="input-group input-group-lg input-group-solid">
@@ -57,10 +57,10 @@
                                                     <i class="la la-at"></i>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control form-control-lg form-control-solid" id="email" value="<?= $user["email"]?>" placeholder="Email">
+                                            <input type="text" class="form-control form-control-lg form-control-solid" id="email" value="<?= $user["email"]?>" placeholder="Email" readonly>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">Old Password</label>
                                     <div class="col-lg-9 col-xl-6">

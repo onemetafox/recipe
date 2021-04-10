@@ -27,9 +27,40 @@ class Recipe extends CustomerController {
 	public function index()
 	{
 		$data["page_title"] = "Recipes";
+
+		$filter = $this->input->post();
+		if(!isset($filter["pagination"])){
+			$pagination["perpage"] = 12;
+			$pagination["page"] = 1;
+		}else{
+			$pagination = $filter["pagination"];
+		}
+
+		$limit["start"] = ($pagination["page"]-1) * $pagination["perpage"];
+		$limit["end"] = $pagination["perpage"];
+		
 		$user = $this->user_data();
-		$filter["user_id"] = $user["id"];
-		// $data["total_count"] = $this
+		$filter["query"]["user_id"] = $user["id"];
+
+		$recipes = $this->recipe->all($filter["query"],$limit);
+		$list = array();
+		foreach($recipes as $recipe){
+			$recipe["ingredients"] = $this->ingredient->getDataByParam(array("recipe_id" => $recipe["id"]));
+			array_merge($list, $recipe);
+		}
+		$data["data"] = $list;
+
+		if(!isset($filter["query"])){
+			$pagination["total"] = $this->recipe->count();
+		}else{
+			$pagination["total"] = $this->recipe->count($filter["query"]);
+		}
+		// $pagination["total"] = "100";
+		$pagination["pages"] = ceil($pagination["total"]/$pagination["perpage"]);
+
+		
+		$data["pagination"] = $pagination;
+		// print_r($data);
 		$this->render("customer/recipe", $data);
 	}
 
