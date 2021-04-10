@@ -50,5 +50,31 @@ class Users extends BaseController {
 
 	public function update(){
 		$data = $this->input->post();
+		$user = $this->user_data();
+		if($data["old_pwd"] || $data["new_pwd"] || $data["cfm_pwd"]){
+			if($user["passwrd"] == md5($data["old_pwd"])){
+				if($data["new_pwd"] != $data["cfm_pwd"]){
+					$this->json(array("success"=>false, "msg"=>"New password is not matched"));
+				}else{
+					$data["password"] = md5($data["new_pwd"]);
+					unset($data["new_pwd"]);
+					unset($data["cfm_pwd"]);
+					unset($data["old_pwd"]);
+				}
+			}else{
+				$this->json(array("success" => false, "msg" => "Old password is not correct"));
+			}
+		}else{
+			unset($data["new_pwd"]);
+			unset($data["cfm_pwd"]);
+			unset($data["old_pwd"]);
+			// $temp = $this->user->getDataByParam(array("email" => strtolower($data["email"])));
+			// if($temp){
+			// 	$this->json(array("success" => false, "msg"=> "That account already exist"));
+			// }else{
+				$this->user->updateData($data);
+				$this->json(array("success"=>true, "msg"=> "Success"));
+			// }
+		}
 	}
 }
