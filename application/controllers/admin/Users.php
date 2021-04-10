@@ -25,8 +25,25 @@ class Users extends AdminController {
 
 	public function api(){
 		$filter = $this->input->post();
-		$data["data"] = $this->user->all($filter["query"]);
-		$data["meta"] = $filter;
+		if(isset($filter["pagination"])){
+			$pagination = $filter["pagination"];
+			if(!$pagination["perpage"]){
+				$pagination["perpage"] = 10;
+			}
+			if(!$pagination["page"]){
+				$pagination["page"] = 1;
+			}
+			$pagination["total"] = $this->user->count($filter["query"]);
+			$pagination["pages"] = ceil($pagination["total"]/$pagination["perpage"]);
+
+			$limit["start"] = ($pagination["page"]-1) * $pagination["perpage"];
+			$limit["end"] = $pagination["perpage"];
+			$data["pagination"] = $pagination;
+			$data["data"] = $this->user->all($filter["query"],$limit);
+		}else{
+			$data["data"] = $this->user->all($filter["query"]);
+		}
+
 		$this->json($data);
 	}
 

@@ -66,7 +66,7 @@ var KTDatatableRemoteAjaxDemo = function() {
 
             search: {
                 input: $('#kt_datatable_search_query'),
-                key: 'generalSearch'
+                key: 'search'
             },
 			// columns definition
             columns: [{
@@ -139,10 +139,10 @@ var KTDatatableRemoteAjaxDemo = function() {
             }],
 
         });
-		$('#kt_datatable_search_status').on('change', function() {
+		$('#kt_datatable_search_type').on('change', function() {
             datatable.search($(this).val().toLowerCase(), 'pay_type');
         });
-        $('#kt_datatable_search_type').on('change', function() {
+        $('#kt_datatable_search_status').on('change', function() {
             datatable.search($(this).val().toLowerCase(), 'restaurant_id');
         });
         $("#new_btn").on("click", function(){
@@ -154,7 +154,7 @@ var KTDatatableRemoteAjaxDemo = function() {
 		// $('#search_btn').on('click', function(){
 		// 	datatable.search($('#kt_datatable_search_type').val().toLowerCase(),'search');
 		// });
-        $('#kt_datatable_search_status, #kt_datatable_search_type').selectpicker();
+        $('#kt_datatable_search_status, #kt_datatable_search_type, #restaurant').selectpicker();
     };
     var temp = function (){
         $("form").submit(function (event) {
@@ -210,11 +210,11 @@ function onEdit(id){
         dataType: "json",
         encode: true,
     }).done(function (data) {
-        var row = data[0];
+        var row = data["data"][0];
         $("#id").val(row["id"]);
         $("#name").val(row["name"]);
         $("#email").val(row["email"]);
-        $("#restaurant").val(row["restaurant_id"]);
+        $("#restaurant").val(row["rest_id"]);
         $("#kt_select2_modal").modal('show');
     });
 }

@@ -56,12 +56,12 @@
 		}
 
 		public function updateData($data) {
-			// $set = array(
-			// 	'name' 	 => $data['name'],
-			// 	'status' => $data['status']
-			// );
 			$query = $this->db->set($data)
 							  ->where('id', $data['id'])
 							  ->update($this->table);
+		}
+		public function counts($filter){
+			$this->where($filter);
+			return $this->db->count_all_results($this->table);
 		}
 	}

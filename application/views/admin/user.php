@@ -93,8 +93,7 @@
           <div class="form-group row">
             <label class="col-form-label text-right col-lg-3 col-sm-12">Restaurant</label>
             <div class="col-lg-9 col-md-9 col-sm-12">
-                <select class="form-control" id="kt_datatable_search_type">
-                <option value="">All</option>
+                <select class="form-control" id="restaurant">
                 <?php foreach($restaurants as $restaurant) { ?>
                     <option value="<?= $restaurant->id?>"><?= $restaurant->name?></option>
                 <?php } ?>
