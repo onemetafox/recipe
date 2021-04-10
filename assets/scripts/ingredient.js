@@ -118,10 +118,13 @@ var KTDatatableRemoteAjaxDemo = function() {
             placeholder: "Add catetory",
             tags: true
         });
+        var demo1 = $('#kt_autosize_1');
     }
-    $(".navi-item>a").click(function(){
-        alert($(this).index());
-    });
+    
+    // $(".ingredients div i").click(function(){
+    //     var myIndex = $(this).parent().prevAll().length;
+    //     alert(myIndex);
+    // });
     return {
         // public functions
         init: function() {
@@ -139,18 +142,18 @@ jQuery(document).ready(function() {
 ;
 //# sourceMappingURL=data-ajax.js.map
 function addIngredient(name, code, allergen){
-    var str =   '<li class="navi-item">\
-                    <span class="navi-item">\
-                        <div class="navi-link">\
-                            <div class="navi-text">\
-                                <div class="font-weight-bold" name="name">'+name+'</div>\
-                                <div class="text-muted"><span name="code">'+code+'</span>, <span name"allenger">'+allergen+'</span></div>\
-                            </div>\
-                            <div class="navi-icon mr-2">\
-                                <i class="flaticon2-cross text-danger"></i>\
-                            </div>\
-                        </div>\
-                    </span>\
-                </li>';
+    var str =   '<div class="d-flex align-items-center bg-light-success rounded p-3 mb-2">\
+                    <div class="d-flex flex-column flex-grow-1 mr-2">\
+                        <span class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1" name="name">'+name+'</span>\
+                        <span class="text-muted font-size-sm" name="code">'+code+', '+allergen+'</span>\
+                    </div>\
+                    <a href="javascript:clicking($(this))"><i class="flaticon2-cross text-danger"></i></a>\
+                </div>'
     $(".ingredients").append(str);
+}
+function clicking(index){
+    console.log(index.parent().class);
+
+    var data = index.parentNode.nodeName;
+    // $(this).parent().prevAll().length
 }
