@@ -105,7 +105,7 @@
                                                         <div class="form-group row fv-plugins-icon-container" data-select2-id="353">
                                                             <label class="col-xl-3 col-lg-3 col-form-label">Category</label>
                                                             <div class="col-lg-9 col-xl-9">
-                                                                <select class="form-control select2" id="kt_select2_11" multiple="multiple" name="param">
+                                                                <select class="form-control select2" id="kt_select2_11" multiple="multiple" name="categories">
                                                                 <?php foreach($categories as $category) { ?>
                                                                     <option value="<?= $category->name?>"><?= $category->name?></option>
                                                                 <?php } ?>

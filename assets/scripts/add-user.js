@@ -78,16 +78,25 @@ var KTAddUser = function () {
 				}
 			}).then(function (result) {
 				if (result.value) {
-					var fd = new FormData();
-					console.log(fd);
+					var paramObj = new FormData($("form#kt_form")[0]);
+					// var paramObj = $("form#kt_form").serialize();
+					var temp = [];
+					for(var pair of paramObj.entries()) {
+						if(pair[0] == "categories")
+							temp.push(pair[1]);
+					}
+					paramObj.append("categories", temp);
 					var files = $('#image')[0].files;
 					if(jQuery.isEmptyObject(ingredients)){
 						toastr.error("Please select ingredients");
 						return;
+					}else{
+						paramObj.append("ingredients", JSON.stringify(ingredients));
 					}
+					// console.log(ingredients);
 					// Check file selected or not
 					if(files.length > 0 ){
-					   fd.append('file',files[0]);
+						paramObj.append('file',files[0]);
 					}else{
 						toastr.error("Please select a file.");
 						return;
@@ -96,23 +105,19 @@ var KTAddUser = function () {
 					$.ajax({
 						url: HOST_URL + 'customer/recipe/save',
 						type: 'post',
-						data: {
-							formdata : fb,
-							ingredient: ingredients
-						},
+						data: paramObj,
 						contentType: false,
 						processData: false,
 						success: function(response){
 							if(response != 0){
-							$("#img").attr("src",response); 
-							$(".preview img").show(); // Display image element
+								$("#img").attr("src",response); 
+								$(".preview img").show(); // Display image element
 							}else{
-							alert('file not uploaded');
+								alert('file not uploaded');
 							}
 						},
 					});
-					
-					wizard.preventDefault();   
+					wizard.preventDefault(); 
 				} else if (result.dismiss === 'cancel') {
 					Swal.fire({
 						text: "Your form has not been submitted!.",

@@ -75,13 +75,62 @@ class Recipe extends CustomerController {
 		$this->render("customer/recipe-edit", $data);
 	}
 	public function save(){
+		$user = $this->user_data();
+		$recipe = $this->recipe->getDataByParam(array("user_id" => $user["id"]));
+		if($user["pay_type"] == 0 && count($recipe) == 10){
+			$this->json(array("success"=>false, "msg"=> "You can't add more recipe"));
+			return;
+		}
 		$data = $this->input->post();
-		print_r($data);
-		// $user = $this->user_data();
-		// $recipe = $this->recipe->getDataByParam(array("user_id" => $user["id"]));
-		// if($user["type"] == 0 && count($recipe) == 10){
-		// 	$this->json(array("success"=>false, "msg"=> "You can't add more recipe"));
-		// 	return;
-		// }
+		$ingredients = json_decode($data["ingredients"]);
+		$categories = explode (",", $this->input->post("categories"));
+		foreach($categories as $category){
+			$temp = $this->category->getDataByParam(array("name"=>$category, "type"=>1));
+			if(!$temp){
+				$this->category->setData(array("type"=>1, "name"=>$category));
+			}
+		}
+		$param["restaurant_id"] = $user["restaurant_id"];
+		$param["user_id"] = $user["id"];
+		$param["name"] = $data["recipeName"];
+		$param["category"] = $data["categories"];
+		if(isset($data["id"])){
+			$this->recipe->updateData($param);
+			$recipe_id = $data["id"];
+		}else{
+			$param["created_at"] = date("Y-m-d h:s:i");
+			$recipe_id = $this->recipe->setData($param);
+		}
+		$this->ingredient->deleteByParam(array("recipe_id" => $recipe_id));
+		foreach($ingredients as $key => $item){
+			$item = (array)$item;
+			$ingredient["name"] = $item[0];
+			$ingredient["code"] = $item[1];
+			$ingredient["allergen"] = $item[2];
+			$ingredient["recipe_id"] = $recipe_id;
+			$this->ingredient->setData($ingredient);
+		}
+		$config['upload_path']          = './uploads/recipe';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 100;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+		$config['file_name']			= $recipe_id;
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload('profile_avatar'))
+		{
+				$error = array('error' => $this->upload->display_errors());
+				print_r($error);
+				// $this->load->view('upload_form', $error);
+		}
+		else
+		{
+				$file =$this->upload->data();
+				$this->recipe->updateData(array("img"=>$file["file_name"], "id"=>$recipe_id));
+				print_r($data);
+		}
+		
 	}
 }

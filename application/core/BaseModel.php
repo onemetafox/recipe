@@ -65,4 +65,10 @@
 				$this->where($filter);
 			return $this->db->count_all_results($this->table);
 		}
+		public function deleteByParam($filter = null){
+			if($filter)
+				$this->where($filter);
+			$query = $this->db->delete($this->table);
+			return $query;
+		}
 	}
