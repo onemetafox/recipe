@@ -14,13 +14,13 @@ var KTDatatableRemoteAjaxDemo = function() {
     // basic demo
     var demo = function() {
 
-        datatable = $('#restaurant').KTDatatable({
+        datatable = $('#allergen').KTDatatable({
             // datasource definition
             data: {
                 type: 'remote',
                 source: {
                     read: {
-                        url: HOST_URL + 'customer/restaurant/api',
+                        url: HOST_URL + 'admin/allergen/api',
                         // sample custom headers
                         headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
                         map: function(raw) {
@@ -72,25 +72,13 @@ var KTDatatableRemoteAjaxDemo = function() {
             columns: [{
                 field: 'name',
                 title: 'Name',
-            }, {
-                field: 'address',
-                title: 'Address'
-            }, {
-                field: 'contact_info',
-                title: 'Address'
-            }, {
-                field: 'created_date',
-                title: 'Created Date'
-            }
-            // , {
-            //     field: 'user_name',
-            //     title: 'Create User'
-            // }
-            , {
+            },{
                 field: 'content',
                 title: 'Description'
-            },
-             {
+            }, {
+                field: 'created_at',
+                title: 'Created Date'
+            },{
                 field: 'Actions',
                 title: 'Actions',
                 sortable: false,
@@ -153,14 +141,12 @@ var KTDatatableRemoteAjaxDemo = function() {
         $("form").submit(function (event) {
             var formData = {
                 name: $("#name").val(),
-                address: $("#address").val(),
-                contact_info: $("#contact_info").val(),
                 content: $("#content").val(),
                 id: $("#id").val(),
             };
             $.ajax({
                 type: "POST",
-                url: HOST_URL + "admin/restaurant/save",
+                url: HOST_URL + "admin/allergen/save",
                 data: formData,
                 dataType: "json",
                 encode: true,
@@ -196,7 +182,7 @@ jQuery(document).ready(function() {
 function onEdit(id){
     $.ajax({
         type: "POST",
-        url: HOST_URL + "admin/restaurant/api",
+        url: HOST_URL + "admin/allergen/api",
         data: {
             query:{"rest_id" : id}
         },
@@ -216,7 +202,7 @@ function onEdit(id){
 function onDel(id){
     $.ajax({
         type: "POST",
-        url: HOST_URL + "admin/restaurant/delete",
+        url: HOST_URL + "admin/allergen/delete",
         data: {"id" : id },
         dataType: "json",
         encode: true,
