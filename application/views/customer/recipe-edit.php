@@ -208,7 +208,7 @@
 <script>
     var HOST_URL = '<?= base_url()?>';    
     var ingredients = new Object();
-    <?php if($ingredients) foreach($ingredients as $item) { ?>
+    <?php if(isset($ingredients)) foreach($ingredients as $item) { ?>
         ingredients['<?=$item["code"]?>'] = ['<?= $item["name"]?>', '<?= $item["code"]?>', '<?= $item["allergen"]?>'];
     <?php } ?>
 </script>

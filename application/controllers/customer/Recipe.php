@@ -137,4 +137,12 @@ class Recipe extends CustomerController {
 		$this->recipe->unsetDataById($id);
 		$this->json(array("success"=>true, "msg"=>"Deleted!"));
 	}
+
+	public function api(){
+		$filter = $this->input->post();
+		$user = $this->user_data();
+		$data["meta"] = $filter;
+		$data["data"] = $this->recipe->getDataByParam(array("user_id"=>$user["id"]));
+		$this->json($data);
+	}
 }

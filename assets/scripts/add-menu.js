@@ -79,31 +79,21 @@ var KTAddUser = function () {
 			}).then(function (result) {
 				if (result.value) {
 					var paramObj = new FormData($("form#kt_form")[0]);
-					// var paramObj = $("form#kt_form").serialize();
 					var temp = [];
 					for(var pair of paramObj.entries()) {
 						if(pair[0] == "categories")
 							temp.push(pair[1]);
 					}
 					paramObj.append("categories", temp);
-					var files = $('#image')[0].files;
-					if(jQuery.isEmptyObject(ingredients)){
-						toastr.error("Please select ingredients");
+					if(jQuery.isEmptyObject(recipes)){
+						toastr.error("Please select recipes");
 						return;
 					}else{
-						paramObj.append("ingredients", JSON.stringify(ingredients));
-					}
-					// console.log(ingredients);
-					// Check file selected or not
-					if(files.length > 0 ){
-						paramObj.append('file',files[0]);
-					}else{
-						// toastr.error("Please select a file.");
-						// return;
+						paramObj.append("recipes", JSON.stringify(recipes));
 					}
 			
 					$.ajax({
-						url: HOST_URL + 'customer/recipe/save',
+						url: HOST_URL + 'customer/menu/save',
 						type: 'post',
 						data: paramObj,
 						contentType: false,
@@ -133,9 +123,6 @@ var KTAddUser = function () {
 	}
 
 	var _initValidations = function () {
-		// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
-
-		// Validation Rules For Step 1
 		_validations.push(FormValidation.formValidation(
 			_formEl,
 			{

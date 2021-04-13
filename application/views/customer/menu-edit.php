@@ -71,6 +71,7 @@
                                     <div class="col-xl-12 col-xxl-12">
                                         <!--begin::Wizard Form-->
                                         <form class="form fv-plugins-bootstrap fv-plugins-framework" id="kt_form">
+                                            <input type="hidden" id="id" name = "id" value="<?= isset($menu)?$menu["id"]:""?>">
                                             <div class="row justify-content-center">
                                                 <div class="col-xl-12">
                                                     <!--begin::Wizard Step 1-->
@@ -80,7 +81,7 @@
                                                         <div class="form-group row fv-plugins-icon-container">
                                                             <label class="col-xl-3 col-lg-3 col-form-label">Recipe Name</label>
                                                             <div class="col-lg-9 col-xl-9">
-                                                                <input class="form-control form-control-solid form-control-lg" name="recipeName" type="text" value="">
+                                                                <input class="form-control form-control-solid form-control-lg" name="name" type="text" value="<?= isset($menu)?$menu["name"]:""?>">
                                                             <div class="fv-plugins-message-container"></div></div>
                                                         </div>
                                                         <!--end::Group-->
@@ -101,7 +102,7 @@
                                                             <label class="col-xl-3 col-lg-3 col-form-label">Recipe detail</label>
                                                             <div class="col-lg-9 col-xl-9">
                                                                 <div class="input-group input-group-solid input-group-lg">
-                                                                    <textarea class="col-lg-12 col-xl-12" name="" id="" cols="30" rows="10"></textarea>
+                                                                    <textarea class="col-lg-12 col-xl-12" name="" id="" cols="30" rows="10" value="<?= isset($menu)?$menu["content"]:""?>"></textarea>
                                                                 </div>
                                                                 <div class="fv-plugins-message-container"></div>
                                                             </div>
@@ -115,23 +116,21 @@
                                                             <div class="card-body">
                                                                 <div class="row">
                                                                     <div class="col-lg-3">
-                                                                        <div class="mt-3">
-                                                                            <ul class="navi navi-bold navi-hover my-5" role="tablist">
-                                                                                <li class="navi-item">
-                                                                                    <a class="navi-link active" data-toggle="tab" href="#kt_profile_tab_personal_information">
-                                                                                        <span class="navi-text">Personal Information</span>
-                                                                                        <span class="navi-icon">
-                                                                                            <i class="flaticon2-cross"></i>
-                                                                                        </span>
-                                                                                    </a>
-                                                                                </li>
-                                                                            </ul>
+                                                                        <div class="mt-3 recipes">
+                                                                            <?php if(isset($menu)){ foreach($recipes as $recipe) {?>
+                                                                                <div class="d-flex align-items-center bg-light-success rounded p-3 mb-2" name="<?= $recipe["id"]?>">
+                                                                                    <div class="d-flex flex-column flex-grow-1 mr-2">
+                                                                                        <span class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1" name="name"><?= $recipe["name"]?></span>
+                                                                                        <span class="text-muted font-size-sm" name="code"><?= $recipe["category"]?></span>
+                                                                                    </div>
+                                                                                    <a href="javascript:clicking('<?= $recipe["id"]?>')"><i class="flaticon2-cross text-danger"></i></a>
+                                                                                </div>
+                                                                            <?php } }?>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-9">
                                                                         <div class="card-body">
                                                                             <!--begin: Search Form-->
-                                                                            <!--begin::Search Form-->
                                                                             <div class="mb-7">
                                                                                 <div class="row align-items-center">
                                                                                     <div class="col-lg-9 col-xl-8">
@@ -144,17 +143,6 @@
                                                                                                     </span>
                                                                                                 </div>
                                                                                             </div>
-                                                                                            <div class="col-md-5 my-2 my-md-0">
-                                                                                                <div class="d-flex align-items-center">
-                                                                                                    <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
-                                                                                                    <select class="form-control" id="kt_datatable_search_status">
-                                                                                                        <option value="">All</option>
-                                                                                                        <?php foreach($categories as $category) { ?>
-                                                                                                            <option value="<?= $category->name?>"><?= $category->name?></option>
-                                                                                                        <?php } ?>
-                                                                                                    </select>
-                                                                                                </div>
-                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
@@ -163,9 +151,8 @@
                                                                                 </div>
                                                                             </div>
                                                                             <!--end::Search Form-->
-                                                                            <!--end: Search Form-->
                                                                             <!--begin: Datatable-->
-                                                                            <div class="datatable datatable-bordered datatable-head-custom" id="ingredient"></div>
+                                                                            <div class="datatable datatable-bordered datatable-head-custom" id="recipe"></div>
                                                                             <!--end: Datatable-->
                                                                         </div>
                                                                     </div>
@@ -187,7 +174,10 @@
                                                     <!--end::Wizard Actions-->
                                                 </div>
                                             </div>
-                                        <div></div><div></div><div></div></form>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </form>
                                         <!--end::Wizard Form-->
                                     </div>
                                 </div>
@@ -205,28 +195,12 @@
     </div>
     <!--end::Entry-->
 </div>
-<script src="<?= asset_url()?>scripts/add-menu.js"></script>
-<script src="<?= asset_url()?>scripts/ingredient.js"></script>
 <script>
-    var HOST_URL = '<?= base_url()?>';
-    var KTSelect2 = function() {
-       // Private functions
-        var demos = function() {
-            $('#kt_select2_11').select2({
-                placeholder: "Add catetory",
-                tags: true
-            });
-        }
-        return {
-            init: function() {
-                demos();
-            }
-        };
-    }();
-
-      // Initialization
-    jQuery(document).ready(function() {
-        KTSelect2.init();
-    });
-    
+    var HOST_URL = '<?= base_url()?>';    
+    var recipes = new Object();
+    <?php if(isset($recipes)) foreach($recipes as $item) { ?>
+        recipes['<?=$item["id"]?>'] = ['<?= $item["name"]?>', '<?= $item["category"]?>'];
+    <?php } ?>
 </script>
+<script src="<?= asset_url()?>scripts/add-menu.js"></script>
+<script src="<?= asset_url()?>scripts/recipe.js"></script>

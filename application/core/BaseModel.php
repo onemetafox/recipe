@@ -71,4 +71,10 @@
 			$query = $this->db->delete($this->table);
 			return $query;
 		}
+
+		public function updateDataByParam($data, $filter){
+			$this->where($filter);
+			$query = $this->db->set($data)->update($this->table);
+			return $query;
+		}
 	}

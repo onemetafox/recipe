@@ -25,7 +25,6 @@ class Ingredient extends CustomerController {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function api(){
-		$filter = $this->input->post();
 		$data["meta"] = $filter;
 		$data["data"] = $this->ingredient->getAll();
 		$this->json($data);
