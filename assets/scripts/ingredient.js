@@ -33,7 +33,7 @@ var KTDatatableRemoteAjaxDemo = function() {
                     },
                 },
                 pageSize: 10,
-                serverPaging: true,
+                serverPaging: false,
                 serverFiltering: true
 				// autoColumns: true
             },
@@ -56,7 +56,7 @@ var KTDatatableRemoteAjaxDemo = function() {
             // column sorting
             sortable: false,
 
-            pagination: true,
+            pagination: false,
 
             search: {
                 input: $('#kt_datatable_search_query'),
@@ -64,17 +64,22 @@ var KTDatatableRemoteAjaxDemo = function() {
             },
 			// columns definition
             columns: [{
-                field: 'code',
-                title: 'Code',
-            }, {
                 field: 'name',
                 title: 'Name'
             }, {
                 field: 'type',
                 title: 'Type'
             }, {
-                field: 'allergen',
-                title: 'Type'
+                field: 'img',
+                title: 'Allergen',
+                template: function(row) {
+                    if(row.allergen != "")
+                        return '\
+                            <img style="width:30px; height:30px" src="'+HOST_URL+'uploads/allergen/'+row.img+'" alt="image">\
+                        ';
+                    else
+                        return "";
+                },
             }
             , {
                 field: 'Actions',
@@ -85,7 +90,7 @@ var KTDatatableRemoteAjaxDemo = function() {
                 autoHide: false,
                 template: function(row) {
                     return '\
-                        <a href = "javascript:addIngredient(\''+row.name+'\',\''+row.code+'\',\''+row.allergen+'\')" class="add_btn btn btn-sm btn-clean btn-icon mr-2" title="Add Ingredient">\
+                        <a href = "javascript:addIngredient(\''+row.name+'\',\''+row.allergen+'\')" class="add_btn btn btn-sm btn-clean btn-icon mr-2" title="Add Ingredient">\
                             <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Code\Plus.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\
                                     <rect x="0" y="0" width="24" height="24"/>\
@@ -141,20 +146,20 @@ jQuery(document).ready(function() {
 /******/ })()
 ;
 //# sourceMappingURL=data-ajax.js.map
-function addIngredient(name, code, allergen){
-    if(!(code in ingredients)){
-        ingredients[code] = arguments;
-        var str =   '<div class="d-flex align-items-center bg-light-success rounded p-3 mb-2" name="'+code+'">\
+function addIngredient(name, allergen){
+    if(!(name in ingredients)){
+        ingredients[name] = arguments;
+        var str =   '<div class="d-flex align-items-center bg-light-success rounded p-3 mb-2" name="'+name+'">\
                         <div class="d-flex flex-column flex-grow-1 mr-2">\
                             <span class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1" name="name">'+name+'</span>\
-                            <span class="text-muted font-size-sm" name="code">'+code+', '+allergen+'</span>\
+                            <span class="text-muted font-size-sm" name="code"> raw '+allergen+'</span>\
                         </div>\
-                        <a href="javascript:clicking('+code+')"><i class="flaticon2-cross text-danger"></i></a>\
+                        <a href="javascript:clicking('+name+')"><i class="flaticon2-cross text-danger"></i></a>\
                     </div>'
         $(".ingredients").append(str);
     }
 }
-function clicking(code){
-    delete ingredients[code];
-    $("div[name="+code+"]").remove();
+function clicking(name){
+    delete ingredients[name];
+    $("div[name="+name+"]").remove();
 }

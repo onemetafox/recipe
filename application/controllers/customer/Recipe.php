@@ -95,7 +95,7 @@ class Recipe extends CustomerController {
 		$param["name"] = $data["recipeName"];
 		$param["category"] = $data["categories"];
 		$param["content"] = $data["content"];
-		if(isset($data["id"])){
+		if($data["id"]){
 			$this->recipe->updateData($param);
 			$recipe_id = $data["id"];
 		}else{
@@ -106,8 +106,7 @@ class Recipe extends CustomerController {
 		foreach($ingredients as $key => $item){
 			$item = (array)$item;
 			$ingredient["name"] = $item[0];
-			$ingredient["code"] = $item[1];
-			$ingredient["allergen"] = $item[2];
+			$ingredient["allergen"] = $item[1];
 			$ingredient["recipe_id"] = $recipe_id;
 			$this->ingredient->setData($ingredient);
 		}

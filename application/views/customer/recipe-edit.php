@@ -209,7 +209,7 @@
     var HOST_URL = '<?= base_url()?>';    
     var ingredients = new Object();
     <?php if(isset($ingredients)) foreach($ingredients as $item) { ?>
-        ingredients['<?=$item["code"]?>'] = ['<?= $item["name"]?>', '<?= $item["code"]?>', '<?= $item["allergen"]?>'];
+        ingredients['<?=$item["name"]?>'] = ['<?= $item["name"]?>', '<?= $item["allergen"]?>'];
     <?php } ?>
 </script>
 <script src="<?= asset_url()?>scripts/add-recipe.js"></script>
