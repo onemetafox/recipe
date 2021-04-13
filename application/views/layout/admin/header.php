@@ -85,7 +85,7 @@
                                         </a>
                                         <!--end::Item-->
                                         <!--begin::Item-->
-                                        <a href="#" class="navi-item">
+                                        <a href="<?=base_url()?>users/profile" class="navi-item">
                                             <div class="navi-link">
                                                 <div class="navi-icon mr-2">
                                                     <i class="flaticon-security text-warning"></i>
@@ -129,5 +129,22 @@
     <!--end::Container-->
 </div>
 <!--end::Header-->
-
+<script>
+var demo = function(){
+    var selectbox = function() {
+        $('#kt_select2_11').select2({
+            placeholder: "Add catetory",
+            tags: true
+        });
+    }
+    return {
+        init: function(){
+            selectbox();
+        }
+    }
+}
+jQuery(document).ready(function() {
+    demo.init();
+});
+</script>
             

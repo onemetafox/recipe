@@ -65,14 +65,17 @@ var KTDatatableRemoteAjaxDemo = function() {
             },
 			// columns definition
             columns: [{
-                field: 'code',
-                title: 'Code',
+                field: 'id',
+                title: 'ID',
             }, {
                 field: 'name',
                 title: 'Name'
             }, {
-                field: 'type',
-                title: 'Type'
+                field: 'category',
+                title: 'Categories'
+            }, {
+                field: 'content',
+                title: 'Description'
             }, {
                 field: 'Actions',
                 title: 'Actions',
@@ -82,7 +85,7 @@ var KTDatatableRemoteAjaxDemo = function() {
                 autoHide: false,
                 template: function(row) {
                     return '\
-                            <a href="javascript:onEdit('+row.id+')" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 edit_btn">\
+                            <a href="'+HOST_URL+ 'customer/menu/view/'+row.id+'" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 edit_btn">\
                             <span class="svg-icon svg-icon-md svg-icon-primary">\
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg-->\
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\

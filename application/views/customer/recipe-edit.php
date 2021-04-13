@@ -119,7 +119,7 @@
                                                             <label class="col-xl-3 col-lg-3 col-form-label">Recipe detail</label>
                                                             <div class="col-lg-9 col-xl-9">
                                                                 <div class="input-group input-group-solid input-group-lg">
-                                                                    <textarea class="form-control" id="kt_autosize_1" rows="3" name="content" value="<?= isset($recipe)?$recipe["content"]:""?>"></textarea>
+                                                                    <textarea class="form-control" id="kt_autosize_1" rows="3" name="content" value=""><?= isset($recipe)?$recipe["content"]:""?></textarea>
                                                                 </div>
                                                                 <div class="fv-plugins-message-container"></div>
                                                             </div>

@@ -1,3 +1,6 @@
+<link href="<?= asset_url()?>css/pages/wizard/wizard-4.css" rel="stylesheet" type="text/css" />
+<script src="<?= asset_url()?>css/pages/wizard/wizard-4.js"></script>
+<script src="<?= asset_url()?>js/pages/crud/forms/widgets/select2.js"></script>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
         <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -111,9 +114,12 @@
                                     <div class="form-group row">
                                         <label class="col-xl-3 col-lg-3 col-form-label">Restaurant</label>
                                         <div class="col-lg-9 col-xl-6">
-                                            <span class="mb-7"><?= $restaurant["name"]?></span><br>
-                                            <span class="mb-7"><?= $restaurant["address"]?></span><br>
-                                            <span class="mb-7"><?= $restaurant["contact_info"]?></span>
+                                            <select class="form-control select2" id="kt_select2_11"  multiple="multiple" name="categories">
+                                                <option value=""></option>
+                                                <?php foreach($restaurants as $restaurant) { ?>
+                                                    <option value="<?= $restaurant["id"]?>" <?= $restaurant["id"]==$user["restaurant_id"]?"selected":""?>><?= $restaurant["name"]?></option>
+                                                <?php } ?>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">

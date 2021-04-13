@@ -89,9 +89,9 @@
                                                         <div class="form-group row fv-plugins-icon-container" data-select2-id="353">
                                                             <label class="col-xl-3 col-lg-3 col-form-label">Category</label>
                                                             <div class="col-lg-9 col-xl-9">
-                                                                <select class="form-control select2" id="kt_select2_11" multiple="multiple" name="param">
-                                                                <?php foreach($categories as $category) { ?>
-                                                                    <option value="<?= $category->name?>"><?= $category->name?></option>
+                                                                <select class="form-control select2" id="kt_select2_11" multiple="multiple" name="categories">
+                                                                <?php if($categories) foreach($categories as $category) { ?>
+                                                                    <option value="<?= $category["name"]?>"><?= $category["name"]   ?></option>
                                                                 <?php } ?>
                                                                 </select>
                                                             </div>
@@ -102,7 +102,7 @@
                                                             <label class="col-xl-3 col-lg-3 col-form-label">Recipe detail</label>
                                                             <div class="col-lg-9 col-xl-9">
                                                                 <div class="input-group input-group-solid input-group-lg">
-                                                                    <textarea class="col-lg-12 col-xl-12" name="" id="" cols="30" rows="10" value="<?= isset($menu)?$menu["content"]:""?>"></textarea>
+                                                                    <textarea class="col-lg-12 col-xl-12"  name="content" id="content" cols="30" rows="10"><?= isset($menu)?$menu["content"]:""?></textarea>
                                                                 </div>
                                                                 <div class="fv-plugins-message-container"></div>
                                                             </div>

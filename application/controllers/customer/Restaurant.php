@@ -1,16 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require_once(APPPATH.'core/AdminController.php');
+require_once(APPPATH.'core/CustomerController.php');
 
-class Restaurant extends AdminController {
+class Restaurant extends CustomerController {
 	
 	var $layout = "admin";
 
 	public function index()
 	{
 		$data["page_title"] = "Restaurant";
-		$this->render("admin/restaurant",$data);
+		$this->render("customer/restaurant",$data);
 	}
 
 	public function api(){
@@ -21,7 +21,7 @@ class Restaurant extends AdminController {
 	public function save(){
 		$data = $this->input->post();
 		$user = $this->user_data();
-		// $data["user_id"] = $user["id"];
+		$data["user_id"] = $user["id"];
 		$data["created_date"] = date("Y-m-d h:s:i");
 		if($data["id"]){
 			$this->restaurant->updateData($data);

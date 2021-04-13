@@ -519,11 +519,11 @@ $config['proxy_ips'] = '';
 $config['menus'] = array(
     'admin' => array(
         array('name'=>"Users", "url"=>"admin/users/index/user"),
-        array('name'=>"Admin", "url"=>"admin/users/index/admin"),
-        array('name'=>"Restaurant", "url"=>"admin/restaurant")
+        array('name'=>"Admin", "url"=>"admin/users/index/admin")
     ),
     'customer' =>array(
         array('name' => "Recipes", "url" =>"customer/recipe"),
-        array('name' => "Menus", "url" =>"customer/menu")
+        array('name' => "Menus", "url" =>"customer/menu"),
+        array('name'=>"Restaurant", "url"=>"customer/restaurant")
     )
 );

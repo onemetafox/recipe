@@ -38,7 +38,12 @@ class Menu extends CustomerController {
 		$data["categories"] = $this->category->getDataByParam(array("type"=>"2","user_id"=>$user["id"]));
 		if($id){
 			$data["menu"] = $this->menu->getDataById($id);
-			$data["recipes"] = $this->recipe->getDataByParam(array("menu_id" => $id));
+			$recipe_ids = json_decode ($data["menu"]["recipe_ids"]);
+			$recipe = [];
+			foreach($recipe_ids as $recipe_id){
+				$recipes = array_push($recipe,$this->recipe->getDataById($recipe_id));
+			}
+			$data["recipes"] = $recipes;
 		}
 		$this->render("customer/menu-edit", $data);
 	}
@@ -50,27 +55,28 @@ class Menu extends CustomerController {
 		foreach($categories as $category){
 			$temp = $this->category->getDataByParam(array("name"=>$category, "type"=>2));
 			if(!$temp){
-				$this->category->setData(array("type"=>1, "name"=>$category, "user_id"=>$user["id"]));
+				$this->category->setData(array("type"=>2, "name"=>$category, "user_id"=>$user["id"]));
 			}
 		}
 		$param["user_id"] = $user["id"];
 		$param["name"] = $data["name"];
 		$param["category"] = $data["categories"];
 		$param["content"] = $data["content"];
-		if(isset($data["id"])){
+		if(isset($data["id"]) && $data["id"]){
 			$this->menu->updateData($param);
 			$menu_id = $data["id"];
 		}else{
 			$param["created_at"] = date("Y-m-d h:s:i");
 			$menu_id = $this->menu->setData($param);
 		}
-		$this->recipe->updateDataByParam(array("menu_id" => ""), array("menu_id"=>$menu_id));
+		// $this->recipe->updateDataByParam(array("menu_id" => ""), array("menu_id"=>$menu_id));
+		$recipe_ids = array();
 		foreach($recipes as $key => $item){
 			$item = (array)$item;
-			$recipe["id"] = $item[0];
-			$recipe_id["menu_id"] = $menu_id;
-			$this->recipe->updateData($recipe);
+			// print_r($item);
+			array_push($recipe_ids,$item[0]);
 		}		
+		$this->menu->updateData(array("id"=>$menu_id, "recipe_ids"=>json_encode($recipe_ids)));
 	}
 	public function delete($id){
 		$this->menu->unsetDataById($id);
@@ -92,7 +98,7 @@ class Menu extends CustomerController {
 
 			$limit["start"] = ($pagination["page"]-1) * $pagination["perpage"];
 			$limit["end"] = $pagination["perpage"];
-			$data["pagination"] = $pagination;
+			$data["meta"] = $pagination;
 			$data["data"] = $this->menu->all($filter["query"],$limit);
 		}else{
 			$data["data"] = $this->menu->all($filter["query"]);
