@@ -46,10 +46,10 @@ class Recipe extends CustomerController {
 		$list = array();
 		foreach($recipes as $recipe){
 			$recipe["ingredients"] = $this->ingredient->getDataByParam(array("recipe_id" => $recipe["id"]));
-			array_merge($list, $recipe);
+			array_push($list, $recipe);
 		}
 		$data["data"] = $list;
-
+		// print_r($list);
 		if(!isset($filter["query"])){
 			$pagination["total"] = $this->recipe->count();
 		}else{
@@ -70,7 +70,7 @@ class Recipe extends CustomerController {
 		$data["categories"] = $this->category->getDataByParam(array("type"=>"1","user_id"=>$user["id"]));
 		if($id){
 			$data["recipe"] = $this->recipe->getDataById($id);
-			$data["ingredients"] = $this->ingredients->getDataByParam(array("recipe_id" => $id));
+			$data["ingredients"] = $this->ingredient->getDataByParam(array("recipe_id" => $id));
 		}
 		$this->render("customer/recipe-edit", $data);
 	}
@@ -87,13 +87,14 @@ class Recipe extends CustomerController {
 		foreach($categories as $category){
 			$temp = $this->category->getDataByParam(array("name"=>$category, "type"=>1));
 			if(!$temp){
-				$this->category->setData(array("type"=>1, "name"=>$category));
+				$this->category->setData(array("type"=>1, "name"=>$category, "user_id"=>$user["id"]));
 			}
 		}
 		$param["restaurant_id"] = $user["restaurant_id"];
 		$param["user_id"] = $user["id"];
 		$param["name"] = $data["recipeName"];
 		$param["category"] = $data["categories"];
+		$param["content"] = $data["content"];
 		if(isset($data["id"])){
 			$this->recipe->updateData($param);
 			$recipe_id = $data["id"];
@@ -123,14 +124,17 @@ class Recipe extends CustomerController {
 		{
 				$error = array('error' => $this->upload->display_errors());
 				print_r($error);
-				// $this->load->view('upload_form', $error);
 		}
 		else
 		{
 				$file =$this->upload->data();
 				$this->recipe->updateData(array("img"=>$file["file_name"], "id"=>$recipe_id));
-				print_r($data);
+				$this->json(array("success"=>true, "message"=>"Success"));
 		}
 		
+	}
+	public function delete($id){
+		$this->recipe->unsetDataById($id);
+		$this->json(array("success"=>true, "msg"=>"Deleted!"));
 	}
 }

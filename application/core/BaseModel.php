@@ -27,7 +27,7 @@
 		public function getDataById($id) {
 			$query = $this->db->where('id', $id)
 							  ->get($this->table)
-							  ->row();
+							  ->row_array();
 			return $query;
 		}
 
@@ -35,7 +35,7 @@
 			if($param){
 				$this->where($param);
 			}
-			$result = $this->db->get($this->table)->result();
+			$result = $this->db->get($this->table)->result_array();
 			return $result;
 		}
 

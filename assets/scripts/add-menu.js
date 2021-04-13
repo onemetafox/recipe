@@ -1,4 +1,4 @@
-var ingredients = {};
+
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 var __webpack_exports__ = {};
@@ -98,8 +98,8 @@ var KTAddUser = function () {
 					if(files.length > 0 ){
 						paramObj.append('file',files[0]);
 					}else{
-						toastr.error("Please select a file.");
-						return;
+						// toastr.error("Please select a file.");
+						// return;
 					}
 			
 					$.ajax({
@@ -109,11 +109,10 @@ var KTAddUser = function () {
 						contentType: false,
 						processData: false,
 						success: function(response){
-							if(response != 0){
-								$("#img").attr("src",response); 
-								$(".preview img").show(); // Display image element
+							if(response.success = true){
+								toastr.success(response.msg);
 							}else{
-								alert('file not uploaded');
+								toastr.error(response.msg)
 							}
 						},
 					});

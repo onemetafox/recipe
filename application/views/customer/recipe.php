@@ -104,10 +104,10 @@
         <div class="container">
             <!--begin::Row-->
             <?php if($data){ 
-                for($i =0 ; i< count($data)/4; $i++){
+                for($i = 0 ; $i< count($data)/4; $i++){
             ?>
             <div class="row">
-                <?php for($j = $i*4 ; $j < ($i +1) * 4 ; $i ++){?>
+                <?php for($j = $i*4 ; $j < ($i+1)*4 ; $j ++){ if(isset($data[$j])) {?>
                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                     <div class="card card-custom gutter-b card-stretch">
                         <div class="card-body pt-4">
@@ -118,7 +118,7 @@
                                     <!--begin::Pic-->
                                     <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                         <div class="symbol symbol-circle symbol-lg-75">
-                                            <img src="<?= $data[$j]['img']?>" alt="image">
+                                            <img src="<?= upload_url()?>recipe/<?= $data[$j]['img']?>" alt="image">
                                         </div>
                                         <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
                                             <span class="font-size-h3 font-weight-boldest">JM</span>
@@ -148,15 +148,15 @@
                                 <?php if($i == 3) break;} ?>
                             </div>
                             <!--end::Info-->
-                            <a href="#" class="btn btn-block btn-sm btn-light-warning font-weight-bolder text-uppercase py-4">Edit Recipe</a>
-                            <a href="#" class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4">View Detail</a>
-                            <a href="#" class="btn btn-block btn-sm btn-light-danger font-weight-bolder text-uppercase py-4">Delete Recipe</a>
+                            <a href="<?= base_url()?>customer/recipe/view/<?= $data[$j]["id"]?>" class="btn btn-block btn-sm btn-light-warning font-weight-bolder text-uppercase py-4">Edit Recipe</a>
+                            <a href="javascript:onView('<?= $data[$j]["id"]?>')" class="btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4">View Detail</a>
+                            <a href="javascript:onDel('<?= $data[$j]["id"]?>')" class="btn btn-block btn-sm btn-light-danger font-weight-bolder text-uppercase py-4">Delete Recipe</a>
                         </div>
                         <!--end::Body-->
                     </div>
                     <!--end::Card-->
                 </div>
-                <?php } ?>
+                <?php } } ?>
                 <!--end::Col-->
             </div>
             <?php }
@@ -206,3 +206,42 @@
     </div>
     <!--end::Entry-->
 </div>
+<script>
+    var HOST_URL = '<?= base_url()?>';    
+    function onView(id){
+
+    }
+
+    function onDel(id){
+        Swal.fire({
+            text: "Really do you want to delete?",
+            icon: "error",
+            showCancelButton: true,
+            buttonsStyling: false,
+            confirmButtonText: "Yes, delete!",
+            cancelButtonText: "No, cancel",
+            customClass: {
+                confirmButton: "btn font-weight-bold btn-danger",
+                cancelButton: "btn font-weight-bold btn-default"
+            }
+        }).then(function (result) {
+            if (result.value) {
+                $.ajax({
+                    url: HOST_URL + 'customer/recipe/delete/'+id,
+                    type: 'post',
+                    // data: id,
+                    contentType: false,
+                    processData: false,
+                    success: function(response){
+                        if(response.success = true){
+                            toastr.success(response.msg);
+                        }else{
+                            toastr.error(response.msg)
+                        }
+                    },
+                });
+                wizard.preventDefault(); 
+            }
+        });
+    }
+</script>

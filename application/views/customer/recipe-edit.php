@@ -71,6 +71,7 @@
                                     <div class="col-xl-12 col-xxl-12">
                                         <!--begin::Wizard Form-->
                                         <form class="form fv-plugins-bootstrap fv-plugins-framework" id="kt_form" enctype="multipart/form-data">
+                                        <input type="hidden" id="id" name = "id" value="<?= isset($recipe)?$recipe["id"]:""?>">
                                             <div class="row justify-content-center">
                                                 <div class="col-xl-12">
                                                     <!--begin::Wizard Step 1-->
@@ -80,7 +81,7 @@
                                                         <div class="form-group row">
                                                             <div class="col-lg-12 col-xl-12 text-center">
                                                                 <div class="image-input image-input-outline" id="kt_user_add_avatar">
-                                                                    <div class="image-input-wrapper" style="background-image: url(<?= isset($recipe)?$recipe["img"]:"" ?>)"></div>
+                                                                    <div class="image-input-wrapper" style="background-image: url(<?= isset($recipe)?upload_url()."/recipe/".$recipe["img"]:"" ?>)"></div>
                                                                     <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                                                         <i class="fa fa-pen icon-sm text-muted"></i>
                                                                         <input type="file" name="profile_avatar" id="image" accept=".png, .jpg, .jpeg">
@@ -105,9 +106,9 @@
                                                         <div class="form-group row fv-plugins-icon-container" data-select2-id="353">
                                                             <label class="col-xl-3 col-lg-3 col-form-label">Category</label>
                                                             <div class="col-lg-9 col-xl-9">
-                                                                <select class="form-control select2" id="kt_select2_11" multiple="multiple" name="categories">
+                                                                <select class="form-control select2" id="kt_select2_11"  multiple="multiple" name="categories">
                                                                 <?php foreach($categories as $category) { ?>
-                                                                    <option value="<?= $category->name?>"><?= $category->name?></option>
+                                                                    <option value="<?= $category["name"]?>"><?= $category["name"]?></option>
                                                                 <?php } ?>
                                                                 </select>
                                                             </div>
@@ -118,7 +119,7 @@
                                                             <label class="col-xl-3 col-lg-3 col-form-label">Recipe detail</label>
                                                             <div class="col-lg-9 col-xl-9">
                                                                 <div class="input-group input-group-solid input-group-lg">
-                                                                    <textarea class="form-control" id="kt_autosize_1" rows="3" value="<?= isset($recipe)?$recipe["content"]:""?>"></textarea>
+                                                                    <textarea class="form-control" id="kt_autosize_1" rows="3" name="content" value="<?= isset($recipe)?$recipe["content"]:""?>"></textarea>
                                                                 </div>
                                                                 <div class="fv-plugins-message-container"></div>
                                                             </div>
@@ -133,11 +134,11 @@
                                                                 <div class="row">
                                                                     <div class="col-lg-3">
                                                                         <div class="mt-3 ingredients">
-                                                                            <?php if(isset($recipe)){ foreach($recipe["ingredients"] as $ingredient) {?>
+                                                                            <?php if(isset($recipe)){ foreach($ingredients as $ingredient) {?>
                                                                                 <div class="d-flex align-items-center bg-light-success rounded p-3 mb-2" name="<?= $ingredient["code"]?>">
                                                                                     <div class="d-flex flex-column flex-grow-1 mr-2">
                                                                                         <span class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1" name="name"><?= $ingredient["name"]?></span>
-                                                                                        <span class="text-muted font-size-sm" name="code"><?= $ingredient["cdoe"]?>, <?= $ingredient["allergen"]?></span>
+                                                                                        <span class="text-muted font-size-sm" name="code"><?= $ingredient["code"]?>, <?= $ingredient["allergen"]?></span>
                                                                                     </div>
                                                                                     <a href="javascript:clicking('<?= $ingredient["code"]?>')"><i class="flaticon2-cross text-danger"></i></a>
                                                                                 </div>
@@ -204,8 +205,12 @@
         </div>
     </div>
 </div>
-<script src="<?= asset_url()?>scripts/add-user.js"></script>
-<script src="<?= asset_url()?>scripts/ingredient.js"></script>
 <script>
     var HOST_URL = '<?= base_url()?>';    
+    var ingredients = new Object();
+    <?php if($ingredients) foreach($ingredients as $item) { ?>
+        ingredients['<?=$item["code"]?>'] = ['<?= $item["name"]?>', '<?= $item["code"]?>', '<?= $item["allergen"]?>'];
+    <?php } ?>
 </script>
+<script src="<?= asset_url()?>scripts/add-recipe.js"></script>
+<script src="<?= asset_url()?>scripts/ingredient.js"></script>

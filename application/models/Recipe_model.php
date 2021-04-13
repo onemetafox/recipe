@@ -24,10 +24,8 @@
 			return parent::where($filter);
 		}
 		public function all($filter = null, $limit = null){
-			// if($filter)
-			// 	$this->where($filter);
-			$this->db->join("ingredient","ingredient.recipe_id = recipe.id", "left");
-			$this->db->select("recipe.*, ingredient.id ingredient_id, ingredient.name ingret_name");
+			if($filter)
+				$this->where($filter);
 			if(isset($limit)){
 				$this->db->limit($limit["end"], $limit["start"]);
 			}

@@ -205,7 +205,7 @@
     </div>
     <!--end::Entry-->
 </div>
-<script src="<?= asset_url()?>scripts/add-user.js"></script>
+<script src="<?= asset_url()?>scripts/add-menu.js"></script>
 <script src="<?= asset_url()?>scripts/ingredient.js"></script>
 <script>
     var HOST_URL = '<?= base_url()?>';
