@@ -139,15 +139,18 @@ var KTDatatableRemoteAjaxDemo = function() {
     };
     var temp = function (){
         $("form").submit(function (event) {
-            var formData = {
-                name: $("#name").val(),
-                content: $("#content").val(),
-                id: $("#id").val(),
-            };
+            var paramObj = new FormData($("form#kt_form")[0]);
+            // var paramObj = $("form#kt_form").serialize();
+            if(files.length > 0 ){
+                paramObj.append('file',files[0]);
+            }else{
+                // toastr.error("Please select a file.");
+                // return;
+            }
             $.ajax({
                 type: "POST",
                 url: HOST_URL + "admin/allergen/save",
-                data: formData,
+                data: paramObj,
                 dataType: "json",
                 encode: true,
             }).done(function (data) {

@@ -114,7 +114,7 @@
                                     <div class="form-group row">
                                         <label class="col-xl-3 col-lg-3 col-form-label">Restaurant</label>
                                         <div class="col-lg-9 col-xl-6">
-                                            <select class="form-control select2" id="kt_select2_11"  multiple="multiple" name="categories">
+                                            <select class="form-control" id="kt_select2_1" name="restaurant">
                                                 <option value=""></option>
                                                 <?php foreach($restaurants as $restaurant) { ?>
                                                     <option value="<?= $restaurant["id"]?>" <?= $restaurant["id"]==$user["restaurant_id"]?"selected":""?>><?= $restaurant["name"]?></option>
@@ -153,6 +153,7 @@
             id:$("#id").val(),
             // email: $("#email").val(),
             name: $("#name").val(),
+            restaurant_id: $("#restaurant").val(),
             old_pwd: $("#old_pwd").val(),
             new_pwd: $("#new_pwd").val(),
             cfm_pwd: $("#cfm_pwd").val()

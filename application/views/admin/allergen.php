@@ -1,4 +1,4 @@
-
+<script src="<?= asset_url()?>js/pages/crud/forms/widgets/autosize.js"></script>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Subheader-->
     <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
@@ -73,7 +73,7 @@
           <i aria-hidden="true" class="ki ki-close"></i>
         </button>
       </div>
-      <form class="form" id ="form">
+      <form class="form" id ="kt_form" enctype="multipart/form-data">
         <input type= "hidden" id="id" name="id">
         <div class="modal-body">
           <div class="form-group row">
@@ -86,14 +86,13 @@
           <div class="form-group row">
             <label class="col-form-label text-right col-lg-3 col-sm-12">Description</label>
             <div class="col-lg-9 col-md-9 col-sm-12">
-              <textarea class="col-lg-12 col-xl-12" cols="30" rows="10" name="content" id="content"></textarea>
+              <textarea class="col-lg-12 col-xl-12" id="kt_autosize_1" cols="30" rows="10" name="content"></textarea>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-form-label text-right col-lg-3 col-sm-12">Image</label>
             <div class="col-lg-9 col-md-9 col-sm-12">
-              <input type="file" name="file" id = "file">
-              <div class="fv-plugins-message-container"></div>
+                <input type="file" name="profile_avatar" id="image" accept=".png, .jpg, .jpeg">
             </div>
           </div>
         </div>

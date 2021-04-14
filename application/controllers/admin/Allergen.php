@@ -27,11 +27,31 @@ class Allergen extends AdminController {
 		$data["created_at"] = date("Y-m-d h:s:i");
 		if($data["id"]){
 			$this->allergen->updateData($data);
-			$this->json(array("success" => true, "msg"=>"Success!"));
+			$id = $data["id"];
 		}else{
-			$this->allergen->setData($data);
-			$this->json(array("success" => true, "msg"=>"Success!"));
+			$id = $this->allergen->setData($data);
 		}
+		$config['upload_path']          = './uploads/allergen';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 100;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+		$config['file_name']			= $recipe_id;
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload('profile_avatar'))
+		{
+			$error = array('error' => $this->upload->display_errors());
+			print_r($error);
+		}
+		else
+		{
+			$file =$this->upload->data();
+			$this->alergen->updateData(array("img"=>$file["file_name"], "id"=>$id));
+		}
+		$this->json(array("success" => true, "msg"=>"Success!"));
+
 	}
 	public function delete(){
 		$id = $this->input->post("id");
