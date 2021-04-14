@@ -83,17 +83,19 @@ class Recipe extends CustomerController {
 		}
 		$data = $this->input->post();
 		$ingredients = json_decode($data["ingredients"]);
-		$categories = explode (",", $this->input->post("categories"));
-		foreach($categories as $category){
-			$temp = $this->category->getDataByParam(array("name"=>$category, "type"=>1));
-			if(!$temp){
-				$this->category->setData(array("type"=>1, "name"=>$category, "user_id"=>$user["id"]));
+		if($data["categories"]){
+			$param["category"] = $data["categories"];
+			$categories = explode (",", $this->input->post("categories"));
+			foreach($categories as $category){
+				$temp = $this->category->getDataByParam(array("name"=>$category, "type"=>1));
+				if(!$temp){
+					$this->category->setData(array("type"=>1, "name"=>$category, "user_id"=>$user["id"]));
+				}
 			}
 		}
 		$param["restaurant_id"] = $user["restaurant_id"];
 		$param["user_id"] = $user["id"];
 		$param["name"] = $data["recipeName"];
-		$param["category"] = $data["categories"];
 		$param["content"] = $data["content"];
 		if($data["id"]){
 			$this->recipe->updateData($param);
@@ -107,6 +109,7 @@ class Recipe extends CustomerController {
 			$item = (array)$item;
 			$ingredient["name"] = $item[0];
 			$ingredient["allergen"] = $item[1];
+			$ingredient["type"] = "raw";
 			$ingredient["recipe_id"] = $recipe_id;
 			$this->ingredient->setData($ingredient);
 		}
@@ -128,7 +131,7 @@ class Recipe extends CustomerController {
 		{
 				$file =$this->upload->data();
 				$this->recipe->updateData(array("img"=>$file["file_name"], "id"=>$recipe_id));
-				$this->json(array("success"=>true, "message"=>"Success"));
+				$this->json(array("success"=>true, "msg"=>"Success"));
 		}
 		
 	}

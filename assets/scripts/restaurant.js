@@ -160,7 +160,7 @@ var KTDatatableRemoteAjaxDemo = function() {
             };
             $.ajax({
                 type: "POST",
-                url: HOST_URL + "admin/restaurant/save",
+                url: HOST_URL + "customer/restaurant/save",
                 data: formData,
                 dataType: "json",
                 encode: true,
@@ -196,7 +196,7 @@ jQuery(document).ready(function() {
 function onEdit(id){
     $.ajax({
         type: "POST",
-        url: HOST_URL + "admin/restaurant/api",
+        url: HOST_URL + "customer/restaurant/api",
         data: {
             query:{"rest_id" : id}
         },
@@ -216,7 +216,7 @@ function onEdit(id){
 function onDel(id){
     $.ajax({
         type: "POST",
-        url: HOST_URL + "admin/restaurant/delete",
+        url: HOST_URL + "customer/restaurant/delete",
         data: {"id" : id },
         dataType: "json",
         encode: true,

@@ -146,10 +146,12 @@
                     contentType: false,
                     processData: false,
                     success: function(response){
-                        if(response.success = true){
-                            toastr.success(response.msg);
+                        var data = JSON.parse(response);
+                        if(data.success == true){
+                            toastr.success(data.msg);
+                            location.reload();
                         }else{
-                            toastr.error(response.msg)
+                            toastr.error(data.msg)
                         }
                     },
                 });

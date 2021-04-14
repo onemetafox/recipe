@@ -61,18 +61,18 @@ var KTDatatableRemoteAjaxDemo = function() {
 
             search: {
                 input: $('#kt_datatable_search_query'),
-                key: 'searchj'
+                key: 'search'
             },
 			// columns definition
             columns: [{
-                field: 'id',
-                title: 'ID',
-            }, {
                 field: 'name',
                 title: 'Name'
             }, {
                 field: 'category',
                 title: 'Categories'
+            }, {
+                field: 'created_at',
+                title: 'Created Date'
             }, {
                 field: 'content',
                 title: 'Description'

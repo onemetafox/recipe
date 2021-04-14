@@ -44,7 +44,7 @@ class Users extends BaseController {
 			$data["menus"] = $menus["customer"];
 		}
 		$data["user"] = $user;
-		$data["restaurants"] = $this->restaurant->getOneByParam(array("user_id" => $user["id"]));
+		$data["restaurants"] = $this->restaurant->getDataByParam(array("user_id" => $user["id"]));
 		$this->render("admin/profile",$data);
 	}
 

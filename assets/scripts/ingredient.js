@@ -154,12 +154,12 @@ function addIngredient(name, allergen){
                             <span class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1" name="name">'+name+'</span>\
                             <span class="text-muted font-size-sm" name="code"> raw '+allergen+'</span>\
                         </div>\
-                        <a href="javascript:clicking('+name+')"><i class="flaticon2-cross text-danger"></i></a>\
+                        <a href="javascript:clicking(\''+name+'\')"><i class="flaticon2-cross text-danger"></i></a>\
                     </div>'
         $(".ingredients").append(str);
     }
 }
 function clicking(name){
     delete ingredients[name];
-    $("div[name="+name+"]").remove();
+    $("div[name='"+name+"']").remove();
 }

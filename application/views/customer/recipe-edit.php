@@ -135,12 +135,12 @@
                                                                     <div class="col-lg-3">
                                                                         <div class="mt-3 ingredients">
                                                                             <?php if(isset($recipe)){ foreach($ingredients as $ingredient) {?>
-                                                                                <div class="d-flex align-items-center bg-light-success rounded p-3 mb-2" name="<?= $ingredient["code"]?>">
+                                                                                <div class="d-flex align-items-center bg-light-success rounded p-3 mb-2" name="<?= $ingredient["name"]?>">
                                                                                     <div class="d-flex flex-column flex-grow-1 mr-2">
                                                                                         <span class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1" name="name"><?= $ingredient["name"]?></span>
-                                                                                        <span class="text-muted font-size-sm" name="code"><?= $ingredient["code"]?>, <?= $ingredient["allergen"]?></span>
+                                                                                        <span class="text-muted font-size-sm" name="code"><?= $ingredient["type"]?>  &nbsp;  <?= $ingredient["allergen"]?></span>
                                                                                     </div>
-                                                                                    <a href="javascript:clicking('<?= $ingredient["code"]?>')"><i class="flaticon2-cross text-danger"></i></a>
+                                                                                    <a href="javascript:clicking('<?= $ingredient["name"]?>')"><i class="flaticon2-cross text-danger"></i></a>
                                                                                 </div>
                                                                             <?php } }?>
                                                                         </div>
