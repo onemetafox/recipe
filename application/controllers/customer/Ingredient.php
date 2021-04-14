@@ -27,51 +27,55 @@ class Ingredient extends CustomerController {
 	public function api(){
 		$filter = $this->input->post();
 		if(isset($filter["query"]["search"])){
-			$url = "https://world.openfoodfacts.org/cgi/suggest.pl?lc=en&tagtype=ingredients&string=". $filter["query"]["search"];
-		}else{
-			$url = "https://world.openfoodfacts.org/cgi/suggest.pl?lc=en&tagtype=ingredients&string=";
-		}
-		
-		$curlSession = curl_init();
-		curl_setopt($curlSession, CURLOPT_URL, $url);
-		curl_setopt($curlSession, CURLOPT_BINARYTRANSFER, true);
-		curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
-		$ingredients = json_decode(curl_exec($curlSession));
-		curl_close($curlSession);
+			$url = "https://en.openfoodfacts.org/ingredient/". $filter["query"]["search"] . ".json";
 
-		// if(isset($filter["pagination"])){
-		// 	$pagination = $filter["pagination"];
-		// 	if(!$pagination["perpage"]){
-		// 		$pagination["perpage"] = 10;
-		// 	}
-		// 	if(!$pagination["page"]){
-		// 		$pagination["page"] = 1;
-		// 	}
-		// 	$pagination["total"] = count($ingredients);
-		// 	$pagination["pages"] = ceil($pagination["total"]/$pagination["perpage"]);
+			$curlSession = curl_init();
+			curl_setopt($curlSession, CURLOPT_URL, $url);
+			curl_setopt($curlSession, CURLOPT_BINARYTRANSFER, true);
+			curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
+			$ingredients = json_decode(curl_exec($curlSession));
+			curl_close($curlSession);
+			// if(isset($filter["pagination"])){
+			// 	$pagination = $filter["pagination"];
+			// 	if(!$pagination["perpage"]){
+			// 		$pagination["perpage"] = 24;
+			// 	}
+			// 	if(!$pagination["page"]){
+			// 		$pagination["page"] = 1;
+			// 	}
+			// 	$pagination["total"] = $ingredients->count;
+			// 	$pagination["pages"] = ceil($pagination["total"]/$pagination["perpage"]);
 
-		// 	$limit["start"] = ($pagination["page"]-1) * $pagination["perpage"];
-		// 	$limit["end"] = $pagination["perpage"];
-		// 	$data["pagination"] = $pagination;
-		// }
+			// 	$limit["start"] = ($pagination["page"]-1) * $pagination["perpage"];
+			// 	$limit["end"] = $pagination["perpage"];
+			// 	$data["pagination"] = $pagination;
+			// }
 
-		$result = array();
-		// for($i = $limit["start"]; $i < $limit["end"]; $i++){
-		for($i = 0; $i < count($ingredients); $i++){
-			$item = $ingredients[$i];
-			$temp["name"] = $item;
-			$temp["type"] = "raw";
-			$allergen = $this->allergen->checkAllergen(str_replace("'","", $item));
-			if($allergen){
-				$temp["allergen"] = $allergen["name"];
-				$temp["img"] = $allergen["img"];
-			}else {
-				$temp["allergen"] = "";
+			$result = array();
+			// for($i = $limit["start"]; $i < $limit["end"]; $i++){
+			$products = $ingredients->products;
+			for($i = 0; $i < 24; $i++){
+				if(isset($products[$i]->brands)){
+					$temp["name"] = $products[$i]->brands;
+					$temp["type"] = "raw";
+					$temp["img"] = array();
+					$temp["allergen"] = $products[$i]->allergens;
+					$allergen_tags = $products[$i]->allergens_tags;
+					
+					foreach($allergen_tags as $tag){
+						$aller = explode(":", $tag);
+						$image = $this->allergen->getOneByParam(array("name"=>$aller[1]));
+						if($image)
+							array_push($temp["img"], $image["img"]);
+					}
+					array_push($result, $temp);
+				}
+				
+				
 			}
-			array_push($result, $temp);
+			$data["data"] = $result;
+			// $data["meta"] = $pagination;
+			$this->json($data);
 		}
-		$data["data"] = $result;
-		// $data["meta"] = $pagination;
-		$this->json($data);
 	}
 }

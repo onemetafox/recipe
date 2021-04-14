@@ -70,18 +70,24 @@ var KTDatatableRemoteAjaxDemo = function() {
                 field: 'type',
                 title: 'Type'
             }, {
+                field: 'allergen',
+                title: 'Allergen'
+            }, {
                 field: 'img',
-                title: 'Allergen',
+                title: 'Allergen'
+                ,
                 template: function(row) {
-                    if(row.allergen != "")
-                        return '\
-                            <img style="width:30px; height:30px" src="'+HOST_URL+'uploads/allergen/'+row.img+'" alt="image">\
-                        ';
-                    else
+                    if(row.allergen != ""){
+                        var str = "";
+                        for(var i =0 ; i < row.img.length; i ++){
+                            str += '<img style="width:30px; height:30px" src="'+HOST_URL+'uploads/allergen/'+row.img[i]+'" alt="image">';
+                        }
+                        return str;
+                    }else{
                         return "";
-                },
-            }
-            , {
+                    }
+                }
+            }, {
                 field: 'Actions',
                 title: 'Actions',
                 sortable: false,
